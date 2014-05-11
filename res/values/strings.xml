@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="weplay">We Play</string>
+    <string name="weplay">WePlay</string>
+    <string name="buscar_partido">Buscar partido</string>
+    <string name="configurar_notificaciones">Configurar notificaciones</string>
+    <string name="compartir_app">Compartir app</string>
 </resources>
