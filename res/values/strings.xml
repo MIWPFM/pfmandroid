@@ -12,6 +12,8 @@
     <string name="menu_option_mysports">Mis Deportes</string>
     <string name="menu_option_mymessages">Mis Mensajes</string>
     <string name="menu_option_logout">Salir</string>
+    <string name="menu_option_showgames">Partidos</string>
+    <string name="menu_option_configuration">Configuración</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
