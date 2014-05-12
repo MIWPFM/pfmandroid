@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="white" type="color">#FFFFFF</item>
+    <item name="def" type="color">#95A5A6</item>
+    <item name="primary" type="color">#2C3E50</item>
+    <item name="success" type="color">#18BC9C</item>
+    <item name="warning" type="color">#F39C12</item>
+    <item name="danger" type="color">#E74C3C</item>
+    <item name="info" type="color">#3498DB</item>
+
+    <integer-array name="weplaycolors">
+        <item>@color/white</item>
+        <item>@color/def</item>
+        <item>@color/primary</item>
+        <item>@color/success</item>
+        <item>@color/warning</item>
+        <item>@color/danger</item>
+        <item>@color/info</item>
+    </integer-array>
+
+</resources>

@@ -6,11 +6,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Main" >
+    tools:context="com.miwpfm.weplay.activities.HomeActivity$PlaceholderFragment" >
 
     <TextView
+        android:id="@+id/section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/weplay" />
+        android:text="@string/menu_option_home" />
 
 </RelativeLayout>

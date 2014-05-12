@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.miwpfm.weplay.HomeActivity" >
+
+    <item
+        android:id="@+id/action_overflow"
+        android:icon="@drawable/ic_action_overflow"
+        android:showAsAction="always"
+        android:title="@string/buscar_partido">
+        <menu>
+            <item
+                android:id="@+id/find_game"
+                android:icon="@android:drawable/ic_menu_search"
+                android:showAsAction="ifRoom"
+                android:title="@string/buscar_partido"/>
+            <item
+                android:id="@+id/config_notif"
+                android:icon="@android:drawable/ic_menu_preferences"
+                android:showAsAction="ifRoom"
+                android:title="@string/configurar_notificaciones"/>
+            <item
+                android:id="@+id/share_app"
+                android:icon="@android:drawable/ic_menu_share"
+                android:showAsAction="ifRoom"
+                android:title="@string/compartir_app"/>
+        </menu>
+    </item>
+
+</menu>
