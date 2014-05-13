@@ -23,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class HomeActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -82,16 +81,22 @@ public class HomeActivity extends Activity implements
 			break;
 		case 5:
 			mTitle = getString(R.string.menu_option_home);
-			fragment = new FragmentHome();
-			Toast.makeText(getApplicationContext(), "Logout",
-					Toast.LENGTH_SHORT).show();
+			logout();
 			break;
 		}
 
-		FragmentManager fragmentManager = getFragmentManager();
+		if (position != 5) {
+			FragmentManager fragmentManager = getFragmentManager();
 
-		fragmentManager.beginTransaction().replace(R.id.container, fragment)
-				.commit();
+			fragmentManager.beginTransaction().replace(R.id.container, fragment)
+					.commit();
+		}
+	}
+	
+	public void logout() {
+		Intent intent = new Intent(this, LoginActivity.class);
+		startActivity(intent);
+		finish();
 	}
 
 	public void onSectionAttached(int number) {
