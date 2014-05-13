@@ -2,11 +2,11 @@
 <resources>
 
     <string name="weplay">WePlay</string>
-    <string name="buscar_partido">Buscar partido</string>
-    <string name="configurar_notificaciones">Configurar notificaciones</string>
-    <string name="compartir_app">Compartir app</string>
-    <string name="title_activity_home">WePlay</string>
-    <string name="menu_option_home">WePlay</string>
+    <string name="show_games">Mostrar partidos</string>
+    <string name="configuration">Configuración</string>
+    <string name="share_app">Compartir app</string>
+    <string name="overflow">Más</string>
+    <string name="menu_option_home">Inicio</string>
     <string name="menu_option_myinfo">Mis Datos</string>
     <string name="menu_option_mygames">Mis Partidos</string>
     <string name="menu_option_mysports">Mis Deportes</string>
@@ -14,9 +14,7 @@
     <string name="menu_option_logout">Salir</string>
     <string name="menu_option_showgames">Partidos</string>
     <string name="menu_option_configuration">Configuración</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
+    <string name="navigation_drawer_open">Abrir menú lateral</string>
+    <string name="navigation_drawer_close">Cerrar menú lateral</string>
 
 </resources>

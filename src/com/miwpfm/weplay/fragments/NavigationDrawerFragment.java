@@ -1,6 +1,7 @@
 package com.miwpfm.weplay.fragments;
 
 import com.miwpfm.weplay.R;
+import com.miwpfm.weplay.adapters.NavigationDrawerListAdapter;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -19,9 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation
@@ -106,16 +105,22 @@ public class NavigationDrawerFragment extends Fragment {
 						selectItem(position);
 					}
 				});
-		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
-				.getThemedContext(),
-				R.layout.drawer_list_item,
-				R.id.text, new String[] {
-						getString(R.string.menu_option_home),
-						getString(R.string.menu_option_myinfo),
-						getString(R.string.menu_option_mysports),
-						getString(R.string.menu_option_mygames),
-						getString(R.string.menu_option_mymessages),
-						getString(R.string.menu_option_logout) }));
+		String[] menuOptions = new String[] {
+				getString(R.string.menu_option_home),
+				getString(R.string.menu_option_myinfo),
+				getString(R.string.menu_option_mysports),
+				getString(R.string.menu_option_mygames),
+				getString(R.string.menu_option_mymessages),
+				getString(R.string.menu_option_logout)};
+		int[] menuIcons = new int[] {
+				R.drawable.home,
+				R.drawable.user,
+				R.drawable.dribbble,
+				R.drawable.calendar,
+				R.drawable.comment,
+				R.drawable.power_off};
+		mDrawerListView.setAdapter(new NavigationDrawerListAdapter(getActionBar()
+				.getThemedContext(), menuOptions, menuIcons));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		return mDrawerListView;
 	}

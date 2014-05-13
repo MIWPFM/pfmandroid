@@ -3,26 +3,26 @@
     tools:context="com.miwpfm.weplay.HomeActivity" >
 
     <item
+        android:id="@+id/find_game"
+        android:icon="@drawable/search"
+        android:showAsAction="ifRoom"
+        android:title="@string/show_games"/>
+    <item
         android:id="@+id/action_overflow"
-        android:icon="@drawable/ic_action_overflow"
-        android:showAsAction="always"
-        android:title="@string/buscar_partido">
+        android:icon="@drawable/ellipsis_v"
+        android:showAsAction="ifRoom"
+        android:title="@string/overflow">
         <menu>
             <item
-                android:id="@+id/find_game"
-                android:icon="@android:drawable/ic_menu_search"
-                android:showAsAction="ifRoom"
-                android:title="@string/buscar_partido"/>
-            <item
                 android:id="@+id/config_notif"
-                android:icon="@android:drawable/ic_menu_preferences"
+                android:icon="@drawable/gear"
                 android:showAsAction="ifRoom"
-                android:title="@string/configurar_notificaciones"/>
+                android:title="@string/configuration"/>
             <item
                 android:id="@+id/share_app"
-                android:icon="@android:drawable/ic_menu_share"
+                android:icon="@drawable/group"
                 android:showAsAction="ifRoom"
-                android:title="@string/compartir_app"/>
+                android:title="@string/share_app"/>
         </menu>
     </item>
 
