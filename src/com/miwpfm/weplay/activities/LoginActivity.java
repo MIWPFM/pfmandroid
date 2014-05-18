@@ -1,6 +1,13 @@
 package com.miwpfm.weplay.activities;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.miwpfm.weplay.R;
+import com.miwpfm.weplay.model.User;
+import com.miwpfm.weplay.security.WsseToken;
+import com.miwpfm.weplay.util.Parameters;
+import com.miwpfm.weplay.util.RestClient;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -11,6 +18,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -43,7 +51,8 @@ public class LoginActivity extends Activity {
 	// Values for email and password at the time of the login attempt.
 	private String mEmail;
 	private String mPassword;
-
+	private User user;
+	
 	// UI references.
 	private EditText mEmailView;
 	private EditText mPasswordView;
@@ -139,10 +148,6 @@ public class LoginActivity extends Activity {
 			mEmailView.setError(getString(R.string.error_field_required));
 			focusView = mEmailView;
 			cancel = true;
-		} else if (!mEmail.contains("@")) {
-			mEmailView.setError(getString(R.string.error_invalid_email));
-			focusView = mEmailView;
-			cancel = true;
 		}
 
 		if (cancel) {
@@ -154,7 +159,9 @@ public class LoginActivity extends Activity {
 			// perform the user login attempt.
 			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 			showProgress(true);
-			mAuthTask = new UserLoginTask();
+			user= new User(mEmail,mPassword);
+			mAuthTask = new UserLoginTask(user);
+
 			mAuthTask.execute((Void) null);
 		}
 	}
@@ -199,33 +206,79 @@ public class LoginActivity extends Activity {
 			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
 		}
 	}
+	
+
 
 	/**
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
 	 */
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+		
+		public User user;
+		RestClient getUser;
+		RestClient login;
+		
+		public UserLoginTask(User user) {
+			super();
+			this.user = user;
+			getUser = new RestClient(Parameters.API_URL+"user/"+user.getUsername());
+		}
+
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
-
+			boolean nextCall=false;
+			JSONObject userData = null;
 			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
+				getUser.AddHeader("application/content", "json");
+				getUser.Execute(RestClient.RequestMethod.GET);
+				
+				switch (getUser.getResponseCode()) {
+				case 200:
+					Log.w("Aqui", "Usuario");
+					userData=getUser.getJsonResponse();
+					nextCall=true;
+					break;
+				case 404:
+					break;
+				default:
+				}
+				
+			} catch (Exception e) {
 				return false;
 			}
 
-			for (String credential : DUMMY_CREDENTIALS) {
-				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
+			if(nextCall){
+				try {
+					user.setSalt(userData.getString("salt"));
+					user.hashPassword();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			}
-
-			// TODO: register the new account here.
-			return true;
+				WsseToken token = new WsseToken(user);
+				login = new RestClient(Parameters.API_URL+"me");
+				login.AddHeader(WsseToken.HEADER_WSSE, token.getWsseHeader());
+				login.AddHeader(WsseToken.HEADER_AUTHORIZATION, token.getAuthorizationHeader());
+				try {
+					login.Execute(RestClient.RequestMethod.GET);
+					if(login.getResponseCode() == 200){
+						
+						return true;
+					}
+						
+				} catch (Exception e) {
+				
+					e.printStackTrace();
+					return false;
+				}
+				
+				
+				
+			}else		
+				return false;
+			
+			return false;
 		}
 
 		@Override
