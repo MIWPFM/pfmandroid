@@ -2,6 +2,7 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
+    <string name="prompt_username">Nombre de Usuario</string>
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in_register"><b>Entra</b> o regístrate</string>
     <string name="action_sign_in_short">Entra</string>
