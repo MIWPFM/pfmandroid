@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.CookieStore;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -17,9 +18,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.protocol.HttpContext;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,14 +39,15 @@ public class RestClient {
 
     private ArrayList <NameValuePair> params;
     private ArrayList <NameValuePair> headers;
-
+    
     private String url;
-
     private int responseCode;
     private String message;
-
     private String response;
 
+    private static HttpContext _context;
+    private static BasicCookieStore _cookieStore;
+    
     public String getResponse() {
         return response;
     }
@@ -151,11 +157,12 @@ public class RestClient {
     private void executeRequest(HttpUriRequest request, String url)
     {
         HttpClient client = new DefaultHttpClient();
-
+        HttpContext context=RestClient.getHttpContextInstance();
+        context.setAttribute(ClientContext.COOKIE_STORE, RestClient.getCookieStoreInstance());
         HttpResponse httpResponse;
 
         try {
-            httpResponse = client.execute(request);
+            httpResponse = client.execute(request,context);
             responseCode = httpResponse.getStatusLine().getStatusCode();
             message = httpResponse.getStatusLine().getReasonPhrase();
 
@@ -199,5 +206,19 @@ public class RestClient {
             }
         }
         return sb.toString();
+    }
+    
+    public static synchronized HttpContext getHttpContextInstance() {
+        if (_context == null) {
+            _context = new BasicHttpContext();
+        }
+        return _context;
+    }
+
+    public static synchronized BasicCookieStore getCookieStoreInstance() {
+        if (_cookieStore == null) {
+            _cookieStore = new BasicCookieStore();
+        }
+        return _cookieStore;
     }
 }
