@@ -16,5 +16,10 @@
     <string name="menu_option_configuration">Configuración</string>
     <string name="navigation_drawer_open">Abrir menú lateral</string>
     <string name="navigation_drawer_close">Cerrar menú lateral</string>
-
+    
+    <!-- my games --> 
+    <string name="my_games_tab_playing">Jugando </string>
+    <string name="my_games_tab_played">Jugados</string>
+    <string name="my_games_tab_organized">Organizados</string>
+    
 </resources>
