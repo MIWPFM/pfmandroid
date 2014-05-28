@@ -7,6 +7,7 @@ import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.activities.LoginActivity.UserLoginTask;
 import com.miwpfm.weplay.model.User;
 import com.miwpfm.weplay.security.WsseToken;
+import com.miwpfm.weplay.util.HydrateObjects;
 import com.miwpfm.weplay.util.Parameters;
 import com.miwpfm.weplay.util.RestClient;
 
@@ -59,6 +60,7 @@ public class FragmentHome extends Fragment {
 				case 200:
 					
 					recommendedGames=recommendedGamesClient.getJsonResponse();
+					
 					valid=true;
 					break;
 				case 404:
