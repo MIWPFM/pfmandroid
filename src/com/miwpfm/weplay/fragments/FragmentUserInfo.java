@@ -59,8 +59,8 @@ public class FragmentUserInfo extends Fragment {
 		@Override
 		protected void onPreExecute() {
 			dialog = new ProgressDialog(getActivity());
-			dialog.setTitle("WePlay");
-			dialog.setMessage("Cargando partidos");
+			dialog.setTitle(getString(R.string.weplay));
+			dialog.setMessage(getString(R.string.loading_my_info_info));
 			dialog.setCancelable(false);
 			dialog.show();
 		}

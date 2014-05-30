@@ -16,13 +16,15 @@
     <string name="menu_option_configuration">Configuración</string>
     <string name="navigation_drawer_open">Abrir menú lateral</string>
     <string name="navigation_drawer_close">Cerrar menú lateral</string>
+    <string name="loading_my_info_info">Cargando datos</string>
+    <string name="loading_my_info_location">Cargando localización</string>
     <string name="error_loading">Lo siento, no ha sido posible cargar sus datos.</string>
-    
-    <!-- my games --> 
+
+    <!-- my games -->
     <string name="my_games_tab_playing">Jugando </string>
     <string name="my_games_tab_played">Jugados</string>
     <string name="my_games_tab_organized">Organizados</string>
-    
+
     <!-- my info -->
     <string name="my_info_tab_info">Datos</string>
     <string name="my_info_tab_location">Localización</string>
@@ -39,5 +41,5 @@
     <string name="my_info_password_new">Nueva Contraseña</string>
     <string name="my_info_password_repeat">Repite Contraseña</string>
     <string name="my_info_save_changes">Guardar Cambios</string>
-    
+
 </resources>

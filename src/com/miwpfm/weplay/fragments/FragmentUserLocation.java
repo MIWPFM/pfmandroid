@@ -1,25 +1,27 @@
 package com.miwpfm.weplay.fragments;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.miwpfm.weplay.R;
-import com.miwpfm.weplay.fragments.FragmentUserInfo.UserInfoTask;
 import com.miwpfm.weplay.util.Parameters;
 import com.miwpfm.weplay.util.RestClient;
 
 public class FragmentUserLocation extends Fragment {
-	TextView text;
+	EditText editAddress;
+	EditText editCity;
+	EditText editProvince;
+	EditText editCommunity;
 	UserLocationTask task;
 
 	@Override
@@ -28,7 +30,10 @@ public class FragmentUserLocation extends Fragment {
 
 		View view = inflater.inflate(R.layout.fragment_user_location, null,
 				false);
-		text = (TextView) view.findViewById(R.id.section_label);
+		editAddress = (EditText) view.findViewById(R.id.editAddress);
+		editCity = (EditText) view.findViewById(R.id.editCity);
+		editProvince = (EditText) view.findViewById(R.id.editProvince);
+		editCommunity = (EditText) view.findViewById(R.id.editCommunity);
 
 		task = new UserLocationTask();
 		task.execute((Void) null);
@@ -42,6 +47,7 @@ public class FragmentUserLocation extends Fragment {
 	 */
 	public class UserLocationTask extends AsyncTask<Void, Void, Boolean> {
 
+		private ProgressDialog dialog;
 		RestClient userLocationClient;
 		JSONObject userLocation = null;
 
@@ -52,13 +58,20 @@ public class FragmentUserLocation extends Fragment {
 		}
 
 		@Override
+		protected void onPreExecute() {
+			dialog = new ProgressDialog(getActivity());
+			dialog.setTitle(getString(R.string.weplay));
+			dialog.setMessage(getString(R.string.loading_my_info_location));
+			dialog.setCancelable(false);
+			dialog.show();
+		}
+
+		@Override
 		protected Boolean doInBackground(Void... params) {
 			boolean valid = false;
 			try {
 
 				userLocationClient.Execute(RestClient.RequestMethod.GET);
-				Log.e("AAAAAAAAA",
-						String.valueOf(userLocationClient.getResponseCode()));
 				switch (userLocationClient.getResponseCode()) {
 				case 200:
 					userLocation = userLocationClient.getJsonResponse();
@@ -66,10 +79,14 @@ public class FragmentUserLocation extends Fragment {
 					valid = true;
 					break;
 				case 404:
-					text.setText("Lo siento, no ha sido posible cargar sus datos.");
+					Toast.makeText(getActivity(),
+							getString(R.string.error_loading),
+							Toast.LENGTH_SHORT).show();
 					break;
 				default:
-					text.setText("Lo siento, no ha sido posible cargar sus datos.");
+					Toast.makeText(getActivity(),
+							getString(R.string.error_loading),
+							Toast.LENGTH_SHORT).show();
 				}
 
 			} catch (Exception e) {
@@ -88,27 +105,27 @@ public class FragmentUserLocation extends Fragment {
 			String city = null;
 			String community = null;
 			String province = null;
+			dialog.dismiss();
 			Long x = (long) 0.00;
 			Long y = (long) 0.00;
 			try {
 				addressObject = userLocation.getJSONObject("address");
-				
-				Log.e("AAAAAAAAAA", userLocation.toString());
-
 				address = addressObject.getString("address");
 				city = addressObject.getString("city");
 				community = addressObject.getString("community");
 				province = addressObject.getString("province");
 				coordinatesObject = addressObject.getJSONObject("coordinates");
-				Log.e("AAAAAAAAAA", coordinatesObject.toString());
 				x = coordinatesObject.getLong("x");
 				y = coordinatesObject.getLong("y");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			text.setText(address + " " + city + " " + community + " "
-					+ province + "x: " + Long.toString(x) + ", y: " + Long.toString(y));
+
+			editAddress.setText(address);
+			editCity.setText(city);
+			editProvince.setText(province);
+			editCommunity.setText(community);
 		}
 
 		@Override
