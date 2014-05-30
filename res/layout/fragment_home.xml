@@ -13,5 +13,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/menu_option_home" />
+    
+    <TextView
+        android:id="@+id/lblEstado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
+    
+    <TextView
+        android:id="@+id/lblLatitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
+    
+    <TextView
+        android:id="@+id/lblLongitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
+    
+    <TextView
+        android:id="@+id/lblPrecision"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
 
 </RelativeLayout>
