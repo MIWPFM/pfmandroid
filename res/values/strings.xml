@@ -16,10 +16,28 @@
     <string name="menu_option_configuration">Configuración</string>
     <string name="navigation_drawer_open">Abrir menú lateral</string>
     <string name="navigation_drawer_close">Cerrar menú lateral</string>
+    <string name="error_loading">Lo siento, no ha sido posible cargar sus datos.</string>
     
     <!-- my games --> 
     <string name="my_games_tab_playing">Jugando </string>
     <string name="my_games_tab_played">Jugados</string>
     <string name="my_games_tab_organized">Organizados</string>
+    
+    <!-- my info -->
+    <string name="my_info_tab_info">Datos</string>
+    <string name="my_info_tab_location">Localización</string>
+    <string name="my_info_tab_password">Contraseña</string>
+    <string name="my_info_info_username">Nickname</string>
+    <string name="my_info_info_name">Nombre</string>
+    <string name="my_info_info_email">Email</string>
+    <string name="my_info_info_birthday">Fecha de Nacimiento</string>
+    <string name="my_info_location_address">Dirección</string>
+    <string name="my_info_location_community">Comunidad Autónoma</string>
+    <string name="my_info_location_province">Provincia</string>
+    <string name="my_info_location_city">Ciudad</string>
+    <string name="my_info_password_old">Antigua Contraseña</string>
+    <string name="my_info_password_new">Nueva Contraseña</string>
+    <string name="my_info_password_repeat">Repite Contraseña</string>
+    <string name="my_info_save_changes">Guardar Cambios</string>
     
 </resources>

@@ -18,10 +18,10 @@ public class FragmentMyGames extends Fragment {
     @Override
     public View onCreateView(
         LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
-    	
+        Bundle savedInstanceState) {    	
     	Activity parent=getActivity();
     	ActionBar actionBar= parent.getActionBar();
+
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setTitle(getString(R.string.menu_option_mygames));
 		

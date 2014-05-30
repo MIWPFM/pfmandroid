@@ -415,13 +415,19 @@ public final class R {
         public static final int youtube_square=0x7f020175;
     }
     public static final class id {
-        public static final int action_forgot_password=0x7f0a0011;
-        public static final int action_overflow=0x7f0a000e;
-        public static final int config_notif=0x7f0a000f;
+        public static final int action_forgot_password=0x7f0a0017;
+        public static final int action_overflow=0x7f0a0014;
+        public static final int btnSave=0x7f0a0012;
+        public static final int config_notif=0x7f0a0015;
         public static final int container=0x7f0a0001;
         public static final int drawer_layout=0x7f0a0000;
+        public static final int editBirthday=0x7f0a0011;
+        public static final int editEmail=0x7f0a0010;
+        public static final int editName=0x7f0a000f;
+        public static final int editUsername=0x7f0a000e;
         public static final int email=0x7f0a0006;
-        public static final int find_game=0x7f0a000d;
+        public static final int find_game=0x7f0a0013;
+        public static final int fragment_container=0x7f0a000d;
         public static final int icon=0x7f0a000a;
         public static final int login=0x7f0a0008;
         public static final int login_form=0x7f0a0005;
@@ -430,7 +436,7 @@ public final class R {
         public static final int navigation_drawer=0x7f0a0002;
         public static final int password=0x7f0a0007;
         public static final int section_label=0x7f0a000c;
-        public static final int share_app=0x7f0a0010;
+        public static final int share_app=0x7f0a0016;
         public static final int sign_in_button=0x7f0a0009;
         public static final int text=0x7f0a000b;
     }
@@ -446,21 +452,25 @@ public final class R {
         public static final int fragment_mysports=0x7f030008;
         public static final int fragment_navigation_drawer=0x7f030009;
         public static final int fragment_showgames=0x7f03000a;
+        public static final int fragment_user_info=0x7f03000b;
+        public static final int fragment_user_location=0x7f03000c;
+        public static final int fragment_user_password=0x7f03000d;
     }
     public static final class menu {
         public static final int home=0x7f090000;
         public static final int login=0x7f090001;
     }
     public static final class string {
-        public static final int action_forgot_password=0x7f070017;
-        public static final int action_sign_in_register=0x7f070015;
-        public static final int action_sign_in_short=0x7f070016;
+        public static final int action_forgot_password=0x7f070027;
+        public static final int action_sign_in_register=0x7f070025;
+        public static final int action_sign_in_short=0x7f070026;
         public static final int configuration=0x7f070002;
-        public static final int error_field_required=0x7f07001c;
-        public static final int error_incorrect_password=0x7f07001b;
-        public static final int error_invalid_email=0x7f070019;
-        public static final int error_invalid_password=0x7f07001a;
-        public static final int login_progress_signing_in=0x7f070018;
+        public static final int error_field_required=0x7f07002c;
+        public static final int error_incorrect_password=0x7f07002b;
+        public static final int error_invalid_email=0x7f070029;
+        public static final int error_invalid_password=0x7f07002a;
+        public static final int error_loading=0x7f07000f;
+        public static final int login_progress_signing_in=0x7f070028;
         public static final int menu_option_configuration=0x7f07000c;
         public static final int menu_option_home=0x7f070005;
         public static final int menu_option_logout=0x7f07000a;
@@ -469,19 +479,36 @@ public final class R {
         public static final int menu_option_mymessages=0x7f070009;
         public static final int menu_option_mysports=0x7f070008;
         public static final int menu_option_showgames=0x7f07000b;
-        public static final int my_games_tab_organized=0x7f070011;
-        public static final int my_games_tab_played=0x7f070010;
+        public static final int my_games_tab_organized=0x7f070012;
+        public static final int my_games_tab_played=0x7f070011;
         /**  my games 
          */
-        public static final int my_games_tab_playing=0x7f07000f;
+        public static final int my_games_tab_playing=0x7f070010;
+        public static final int my_info_info_birthday=0x7f070019;
+        public static final int my_info_info_email=0x7f070018;
+        public static final int my_info_info_name=0x7f070017;
+        public static final int my_info_info_username=0x7f070016;
+        public static final int my_info_location_address=0x7f07001a;
+        public static final int my_info_location_city=0x7f07001d;
+        public static final int my_info_location_community=0x7f07001b;
+        public static final int my_info_location_province=0x7f07001c;
+        public static final int my_info_password_new=0x7f07001f;
+        public static final int my_info_password_old=0x7f07001e;
+        public static final int my_info_password_repeat=0x7f070020;
+        public static final int my_info_save_changes=0x7f070021;
+        /**  my info 
+         */
+        public static final int my_info_tab_info=0x7f070013;
+        public static final int my_info_tab_location=0x7f070014;
+        public static final int my_info_tab_password=0x7f070015;
         public static final int navigation_drawer_close=0x7f07000e;
         public static final int navigation_drawer_open=0x7f07000d;
         public static final int overflow=0x7f070004;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f070012;
-        public static final int prompt_password=0x7f070014;
-        public static final int prompt_username=0x7f070013;
+        public static final int prompt_email=0x7f070022;
+        public static final int prompt_password=0x7f070024;
+        public static final int prompt_username=0x7f070023;
         public static final int share_app=0x7f070003;
         public static final int show_games=0x7f070001;
         public static final int weplay=0x7f070000;
@@ -493,7 +520,6 @@ public final class R {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-
     
 
         Base application theme for API 11+. This theme completely replaces
