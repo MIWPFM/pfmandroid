@@ -9,24 +9,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textStyle="bold"
-    android:textSize="20px" />
+    android:textSize="14sp" />
+
+<TextView android:id="@+id/gameHour"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:textSize="14sp" />
  
 <TextView android:id="@+id/sport"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textStyle="normal"
-    android:textSize="12px" />
+    android:textSize="14sp" />
  
 <TextView android:id="@+id/numPlayers"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textStyle="normal"
-    android:textSize="12px" />
+    android:textSize="14sp" />
 
 <TextView android:id="@+id/place"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textStyle="normal"
-    android:textSize="12px" />
+    android:textSize="14sp" />
 
 </LinearLayout>
