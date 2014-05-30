@@ -6,16 +6,10 @@ public class Game {
 	private String id;
 	private Date gameDate;
 	private int numPlayers;
+	private int maxPlayers;
 	private String sport;
 	private String place;
 	
-	public Game(Date gameDate, int numPlayers, String sport, String place) {
-		super();
-		this.gameDate = gameDate;
-		this.numPlayers = numPlayers;
-		this.sport = sport;
-		this.place = place;
-	}
 	public Game() {
 		super();
 	}
@@ -49,6 +43,14 @@ public class Game {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public int getMaxPlayers() {
+		return maxPlayers;
+	}
+
+	public void setMaxPlayers(int maxPlayers) {
+		this.maxPlayers = maxPlayers;
 	}
 
 	

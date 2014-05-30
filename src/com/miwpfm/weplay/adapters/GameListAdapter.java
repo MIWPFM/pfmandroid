@@ -1,5 +1,7 @@
 package com.miwpfm.weplay.adapters;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.miwpfm.weplay.R;
@@ -21,6 +23,7 @@ public class GameListAdapter extends ArrayAdapter<Game> {
 	    public TextView sport;
 	    public TextView place;
 	    public TextView gameDate;
+	    public TextView hourDate;
 	    public TextView numPlayers;
 	  }
 
@@ -42,6 +45,7 @@ public class GameListAdapter extends ArrayAdapter<Game> {
 	      viewHolder.sport = (TextView) rowView.findViewById(R.id.sport);
 	      viewHolder.place = (TextView) rowView.findViewById(R.id.place);
 	      viewHolder.gameDate = (TextView) rowView.findViewById(R.id.gameDate);
+	      viewHolder.hourDate = (TextView) rowView.findViewById(R.id.gameHour);
 	      viewHolder.numPlayers = (TextView) rowView.findViewById(R.id.numPlayers);
 	      rowView.setTag(viewHolder);
 	    }
@@ -51,8 +55,15 @@ public class GameListAdapter extends ArrayAdapter<Game> {
 	    Game game=games.get(position);
 	    holder.sport.setText(game.getSport());
 	    holder.place.setText(game.getPlace());
-	    holder.numPlayers.setText(String.valueOf(game.getNumPlayers()));
-	    
+	    String numPlayers=game.getNumPlayers()+"/"+game.getMaxPlayers();
+	    holder.numPlayers.setText(numPlayers);
+	    DateFormat dateFormat=new SimpleDateFormat("dd/MM");
+	    DateFormat hourFormat=new SimpleDateFormat("hh:mm");
+	    String date = dateFormat.format(game.getGameDate());
+	    String hour = hourFormat.format(game.getGameDate());
+
+	    holder.gameDate.setText(date);
+	    holder.hourDate.setText(hour);
 
 	    return rowView;
 	  }
