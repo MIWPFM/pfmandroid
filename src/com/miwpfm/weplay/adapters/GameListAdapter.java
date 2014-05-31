@@ -32,7 +32,7 @@ public class GameListAdapter extends ArrayAdapter<Game> {
 	    this.context = context;
 	    this.games=games;
 	  }
-
+	
 	  @Override
 	  public View getView(int position, View convertView, ViewGroup parent) {
 	    View rowView = convertView;

@@ -20,11 +20,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class FragmentShowGames extends Fragment {
 	 private ProgressDialog mProgressDialog ;
 	 private GamesTask task;
+	 private ListView gamesList;
     @Override
     public View onCreateView(
         LayoutInflater inflater, ViewGroup container,
@@ -89,9 +93,22 @@ public class FragmentShowGames extends Fragment {
    			
    			if(success){
 	   			GameListAdapter adaptador =new GameListAdapter(getActivity(), games);
-				ListView lstOpciones = (ListView)getActivity().findViewById(R.id.games);
-				 if(lstOpciones != null)
-					 	lstOpciones.setAdapter(adaptador);
+				gamesList = (ListView)getActivity().findViewById(R.id.games);
+				 if(gamesList != null){	
+					 gamesList.setAdapter(adaptador);
+					 gamesList.setOnItemClickListener(new OnItemClickListener() {
+				            public void onItemClick(AdapterView<?> parent, View view,
+				                int position, long id) {
+
+				                // selected item
+				            	Game game= (Game) parent.getItemAtPosition(position);
+				                game.getId();
+				            	Toast toast=Toast.makeText(getActivity(), game.getId(), Toast.LENGTH_SHORT);
+				                toast.show();
+
+				            }
+				          });
+				 }
    			}
    		}
 
