@@ -58,7 +58,7 @@ public class GameListAdapter extends ArrayAdapter<Game> {
 	    String numPlayers=game.getNumPlayers()+"/"+game.getMaxPlayers();
 	    holder.numPlayers.setText(numPlayers);
 	    DateFormat dateFormat=new SimpleDateFormat("dd/MM");
-	    DateFormat hourFormat=new SimpleDateFormat("hh:mm");
+	    DateFormat hourFormat=new SimpleDateFormat("HH:mm");
 	    String date = dateFormat.format(game.getGameDate());
 	    String hour = hourFormat.format(game.getGameDate());
 
