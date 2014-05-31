@@ -35,4 +35,10 @@
     android:textStyle="normal"
     android:textSize="14sp" />
 
+<TextView android:id="@+id/distance"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textStyle="normal"
+    android:textSize="14sp" />
+
 </LinearLayout>

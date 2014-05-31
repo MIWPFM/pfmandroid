@@ -12,30 +12,16 @@
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/menu_option_home" />
+        android:text="@string/menu_option_myrecommenders" >
+        
+    </TextView>
     
-    <TextView
-        android:id="@+id/lblEstado"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/my_games_list"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         />
-    
-    <TextView
-        android:id="@+id/lblLatitud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         />
-    
-    <TextView
-        android:id="@+id/lblLongitud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         />
-    
-    <TextView
-        android:id="@+id/lblPrecision"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         />
+        android:layout_alignLeft="@+id/section_label" >
+
+    </ListView>
 
 </RelativeLayout>

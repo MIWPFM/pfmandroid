@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.CookieStore;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -25,6 +24,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,7 +57,12 @@ public class RestClient {
     	
 		return json;
     }
-
+    
+    public JSONArray getJsonArrayResponse() throws JSONException{
+    	JSONArray jsonArray = new JSONArray(response);
+    	return jsonArray;
+    }
+    
     public String getErrorMessage() {
         return message;
     }
