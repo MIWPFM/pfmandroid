@@ -35,6 +35,7 @@ public class NavigationDrawerListAdapter extends ArrayAdapter<String> {
 	    if (rowView == null) {
 	      LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	      rowView = inflater.inflate(R.layout.drawer_list_item, null);
+	      
 	      // configure view holder
 	      ViewHolder viewHolder = new ViewHolder();
 	      viewHolder.text = (TextView) rowView.findViewById(R.id.text);
