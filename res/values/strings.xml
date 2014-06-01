@@ -10,6 +10,7 @@
     <string name="menu_option_myrecommenders">Te recomendamos los siguientes partidos:</string>
     <string name="menu_option_myinfo">Mis Datos</string>
     <string name="menu_option_mygames">Mis Partidos</string>
+    <string name="menu_option_show_game">Ver Partido</string>
     <string name="menu_option_mysports">Mis Deportes</string>
     <string name="menu_option_mymessages">Mis Mensajes</string>
     <string name="menu_option_logout">Salir</string>
@@ -19,6 +20,7 @@
     <string name="navigation_drawer_close">Cerrar menú lateral</string>
     <string name="loading_my_info_info">Cargando datos</string>
     <string name="loading_my_info_location">Cargando localización</string>
+    <string name="loading_game">Cargando partido</string>
     <string name="error_loading">Lo siento, no ha sido posible cargar sus datos.</string>
 
     <!-- my games -->
@@ -43,4 +45,9 @@
     <string name="my_info_password_repeat">Repite Contraseña</string>
     <string name="my_info_save_changes">Guardar Cambios</string>
 
+    <!-- game -->
+    <string name="game_vacancies">Plazas:</string>
+    <string name="game_price">Precio:</string>
+    <string name="game_unsuscribe_limit">Límite de Baja:</string>
+    <string name="game_how_to_go">Cómo llego</string>
 </resources>

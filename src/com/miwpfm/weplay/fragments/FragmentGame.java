@@ -1,5 +1,6 @@
 package com.miwpfm.weplay.fragments;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,36 +9,102 @@ import com.miwpfm.weplay.fragments.FragmentUserInfo.UserInfoTask;
 import com.miwpfm.weplay.util.Parameters;
 import com.miwpfm.weplay.util.RestClient;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class FragmentGame extends Fragment {
-	private String id;
-	TextView text;
+	String gameId;
+	String slat, slng, dlat, dlng;
+	TextView textSport, textDate, textVacancies, textCenter, textCity,
+			textPrice, textUnsuscribeDate;
+	Button btnHowToGo;
 	GameTask task;
-	 
-    @Override
-    public View onCreateView(
-        LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_game, container,
-				false);
-		text = (TextView) view.findViewById(R.id.section_label);
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		ActionBar actionBar = getActivity().getActionBar();
+		actionBar.removeAllTabs();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		actionBar.setTitle(getString(R.string.menu_option_show_game));
+		Bundle args = getArguments();
+		if (args != null && args.containsKey("gameId")) {
+			gameId = args.getString("gameId");
+		}
+		View view = inflater.inflate(R.layout.fragment_game, container, false);
+		textSport = (TextView) view.findViewById(R.id.textSport);
+		textDate = (TextView) view.findViewById(R.id.textDate);
+		textVacancies = (TextView) view.findViewById(R.id.textVacancies);
+		textCenter = (TextView) view.findViewById(R.id.textCenter);
+		textCity = (TextView) view.findViewById(R.id.textCity);
+		textPrice = (TextView) view.findViewById(R.id.textPrice);
+		textUnsuscribeDate = (TextView) view
+				.findViewById(R.id.textUnsuscribeDate);
+		btnHowToGo = (Button) view.findViewById(R.id.btnHowToGo);
+
+		btnHowToGo.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getCurrentLocation();
+				if (slat == null || slng == null) {
+					Toast.makeText(getActivity(),
+							"No ha sido posible localizarle",
+							Toast.LENGTH_SHORT).show();
+				} else if (dlat == null || slng == null) {
+					Toast.makeText(getActivity(),
+							"El partido no tiene localización asignada",
+							Toast.LENGTH_SHORT).show();
+				} else {
+					String uri = "http://maps.google.com/maps?saddr=" + slat
+							+ "," + slng + "&daddr=" + dlat + "," + dlng;
+					Intent intent = new Intent(
+							android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+					intent.setClassName("com.google.android.apps.maps",
+							"com.google.android.maps.MapsActivity");
+					startActivity(intent);
+				}
+			}
+		});
+		
 		task = new GameTask();
 		task.execute((Void) null);
- 
-        return view;
-    }
+
+		return view;
+	}
+
+	public void getCurrentLocation() {
+		LocationManager lm = (LocationManager) getActivity()
+				.getSystemService(Context.LOCATION_SERVICE);
+		Criteria c = new Criteria();
+		String provider = lm.getBestProvider(c, false);
+		Location location = lm.getLastKnownLocation(provider);
+		if (location != null) {
+			slng = Double.toString(location.getLongitude());
+			slat = Double.toString(location.getLatitude());
+		} else {
+			slng = null;
+			slat = null;
+		}
+	}
 
 	/**
 	 * Represents an asynchronous login/registration task used to authenticate
@@ -51,16 +118,15 @@ public class FragmentGame extends Fragment {
 
 		public GameTask() {
 			super();
-			id = "5388be7d4ee65ce41e000029";
-
-			gameInfoClient = new RestClient(Parameters.API_URL + "/game/" + id);
+			gameInfoClient = new RestClient(Parameters.API_URL + "game/"
+					+ gameId);
 		}
 
 		@Override
 		protected void onPreExecute() {
 			dialog = new ProgressDialog(getActivity());
 			dialog.setTitle(getString(R.string.weplay));
-			dialog.setMessage(getString(R.string.loading_my_info_info));
+			dialog.setMessage(getString(R.string.loading_game));
 			dialog.setCancelable(false);
 			dialog.show();
 		}
@@ -74,20 +140,15 @@ public class FragmentGame extends Fragment {
 				switch (gameInfoClient.getResponseCode()) {
 				case 200:
 					gameInfo = gameInfoClient.getJsonResponse();
-					Log.e("AAAAAAAAAAAAAAA", "hola0");
-					Log.e("AAAAAAAAAAAAAAA", gameInfo.toString());
 
 					valid = true;
 					break;
 				case 404:
-					Log.e("AAAAAAAAAAAAAAA", "hola1");
 					Toast.makeText(getActivity(),
 							getString(R.string.error_loading),
 							Toast.LENGTH_SHORT).show();
 					break;
 				default:
-					Log.e("AAAAAAAAAAAAAAA", "hola2");
-					Log.e("AAAAAAAAAAAAAAA", gameInfo.toString());
 					Toast.makeText(getActivity(),
 							getString(R.string.error_loading),
 							Toast.LENGTH_SHORT).show();
@@ -102,23 +163,50 @@ public class FragmentGame extends Fragment {
 
 		@Override
 		protected void onPostExecute(final Boolean success) {
-			/*String name = "";
-			String username = "";
-			String email = "";
-			String birthday = "";*/
-			dialog.dismiss();
-			/*try {
-				
-				name = gameInfo.getString("name");
-				username = gameInfo.getString("username");
-				email = gameInfo.getString("email");
-				birthday = gameInfo.getString("birthday");
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-
-			//text.setText(gameInfo.toString());
+			if (success) {
+				JSONObject sportObject;
+				JSONObject centerObject;
+				JSONObject addressObject;
+				JSONObject coordinatesObject;
+				JSONArray playersArray;
+				String sport = "";
+				String date = "";
+				String vacancies = "";
+				String center = "";
+				String city = "";
+				String price = "";
+				String unsuscribeDate = "";
+				dialog.dismiss();
+				try {
+					sportObject = gameInfo.getJSONObject("sport");
+					centerObject = gameInfo.getJSONObject("center");
+					addressObject = centerObject.getJSONObject("address");
+					coordinatesObject = addressObject
+							.getJSONObject("coordinates");
+					dlat = Double.toString(coordinatesObject.getDouble("x"));
+					dlng = Double.toString(coordinatesObject.getDouble("y"));
+					playersArray = gameInfo.getJSONArray("players");
+					sport = sportObject.getString("name");
+					date = gameInfo.getString("game_date");
+					int numPlayers = playersArray.length() + 1;
+					vacancies = numPlayers + "/"
+							+ gameInfo.getInt("num_players");
+					center = centerObject.getString("name");
+					city = addressObject.getString("city");
+					price = gameInfo.getString("price");
+					unsuscribeDate = gameInfo.getString("limit_date");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				textSport.setText(sport);
+				textDate.setText(date);
+				textVacancies.setText(vacancies);
+				textCenter.setText(center);
+				textCity.setText(city);
+				textPrice.setText(price);
+				textUnsuscribeDate.setText(unsuscribeDate);
+			}
 		}
 
 		@Override

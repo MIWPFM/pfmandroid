@@ -15,8 +15,10 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +28,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.TextView;
 
 public class HomeActivity extends Activity implements
-		NavigationDrawerFragment.NavigationDrawerCallbacks {
+		NavigationDrawerFragment.NavigationDrawerCallbacks,
+		FragmentMyGames.OnGameSelectedListener {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
@@ -89,11 +92,11 @@ public class HomeActivity extends Activity implements
 		if (position != 5) {
 			FragmentManager fragmentManager = getFragmentManager();
 
-			fragmentManager.beginTransaction().replace(R.id.container, fragment)
-					.commit();
+			fragmentManager.beginTransaction()
+					.replace(R.id.container, fragment).commit();
 		}
 	}
-	
+
 	public void logout() {
 		Intent intent = new Intent(this, LoginActivity.class);
 		startActivity(intent);
@@ -137,7 +140,7 @@ public class HomeActivity extends Activity implements
 			// if the drawer is not showing. Otherwise, let the drawer
 			// decide what to show in the action bar.
 			getMenuInflater().inflate(R.menu.home, menu);
-			//restoreActionBar();
+			// restoreActionBar();
 			return true;
 		}
 		return super.onCreateOptionsMenu(menu);
@@ -188,48 +191,19 @@ public class HomeActivity extends Activity implements
 		startActivity(Intent.createChooser(sharingIntent, "Compártelo por"));
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		private static final String ARG_SECTION_NUMBER = "section_number";
+	public void onGameSelected(String gameId) {
+		Fragment fragment = new FragmentGame();
+		Bundle args = new Bundle();
+		args.putString("gameId", gameId);
+		fragment.setArguments(args);
 
-		/**
-		 * Returns a new instance of this fragment for the given section number.
-		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			return fragment;
-		}
+		FragmentTransaction transaction = getFragmentManager()
+				.beginTransaction();
 
-		public PlaceholderFragment() {
-		}
+		transaction.replace(R.id.container, fragment);
+		transaction.addToBackStack(null);
 
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_home, container,
-					false);
-			TextView textView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			textView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
-			return rootView;
-		}
-
-		@Override
-		public void onAttach(Activity activity) {
-			super.onAttach(activity);
-			((HomeActivity) activity).onSectionAttached(getArguments().getInt(
-					ARG_SECTION_NUMBER));
-		}
+		transaction.commit();
 	}
 
 }
