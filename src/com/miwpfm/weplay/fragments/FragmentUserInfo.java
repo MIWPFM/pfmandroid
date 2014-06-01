@@ -97,25 +97,27 @@ public class FragmentUserInfo extends Fragment {
 
 		@Override
 		protected void onPostExecute(final Boolean success) {
-			String name = "";
-			String username = "";
-			String email = "";
-			String birthday = "";
-			dialog.dismiss();
-			try {
-				name = userInfo.getString("name");
-				username = userInfo.getString("username");
-				email = userInfo.getString("email");
-				birthday = userInfo.getString("birthday");
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			if (success) {
+				String name = "";
+				String username = "";
+				String email = "";
+				String birthday = "";
+				dialog.dismiss();
+				try {
+					name = userInfo.getString("name");
+					username = userInfo.getString("username");
+					email = userInfo.getString("email");
+					birthday = userInfo.getString("birthday");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-			editUsername.setText(username);
-			editName.setText(name);
-			editEmail.setText(email);
-			editBirthday.setText(birthday);
+				editUsername.setText(username);
+				editName.setText(name);
+				editEmail.setText(email);
+				editBirthday.setText(birthday);
+			}
 		}
 
 		@Override

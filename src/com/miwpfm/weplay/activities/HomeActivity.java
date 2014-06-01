@@ -2,6 +2,7 @@ package com.miwpfm.weplay.activities;
 
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.fragments.FragmentConfiguration;
+import com.miwpfm.weplay.fragments.FragmentGame;
 import com.miwpfm.weplay.fragments.FragmentHome;
 import com.miwpfm.weplay.fragments.FragmentMyGames;
 import com.miwpfm.weplay.fragments.FragmentMyInfo;
@@ -152,7 +153,7 @@ public class HomeActivity extends Activity implements
 		int id = item.getItemId();
 		if (id == R.id.find_game) {
 			mTitle = getString(R.string.menu_option_showgames);
-			fragment = new FragmentShowGames();
+			fragment = new FragmentGame();
 
 			FragmentManager fragmentManager = getFragmentManager();
 

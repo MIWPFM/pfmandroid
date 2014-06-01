@@ -99,33 +99,36 @@ public class FragmentUserLocation extends Fragment {
 		@Override
 		protected void onPostExecute(final Boolean success) {
 
-			JSONObject addressObject;
-			JSONObject coordinatesObject;
-			String address = null;
-			String city = null;
-			String community = null;
-			String province = null;
-			dialog.dismiss();
-			Long x = (long) 0.00;
-			Long y = (long) 0.00;
-			try {
-				addressObject = userLocation.getJSONObject("address");
-				address = addressObject.getString("address");
-				city = addressObject.getString("city");
-				community = addressObject.getString("community");
-				province = addressObject.getString("province");
-				coordinatesObject = addressObject.getJSONObject("coordinates");
-				x = coordinatesObject.getLong("x");
-				y = coordinatesObject.getLong("y");
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			if (success) {
+				JSONObject addressObject;
+				JSONObject coordinatesObject;
+				String address = null;
+				String city = null;
+				String community = null;
+				String province = null;
+				dialog.dismiss();
+				Long x = (long) 0.00;
+				Long y = (long) 0.00;
+				try {
+					addressObject = userLocation.getJSONObject("address");
+					address = addressObject.getString("address");
+					city = addressObject.getString("city");
+					community = addressObject.getString("community");
+					province = addressObject.getString("province");
+					coordinatesObject = addressObject
+							.getJSONObject("coordinates");
+					x = coordinatesObject.getLong("x");
+					y = coordinatesObject.getLong("y");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-			editAddress.setText(address);
-			editCity.setText(city);
-			editProvince.setText(province);
-			editCommunity.setText(community);
+				editAddress.setText(address);
+				editCity.setText(city);
+				editProvince.setText(province);
+				editCommunity.setText(community);
+			}
 		}
 
 		@Override
