@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.miwpfm.weplay.model.Game;
+import com.miwpfm.weplay.model.Sport;
 
 public class HydrateObjects {
 	
@@ -73,8 +74,7 @@ public class HydrateObjects {
 	    	    game.setSport(sport.getString("name"));    	    
 	    	    JSONObject center = (JSONObject) JSONgame.get("center");
 	    	    game.setPlace(center.getString("name"));	  	    
-	    	    
-	    	    
+	    	    	    	    
 	    	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 	            String stringDate = JSONgame.getString("game_date");            
 	            try {
@@ -88,9 +88,31 @@ public class HydrateObjects {
     		} catch (JSONException e) {
 
             }            
-    	}
-        
+    	}        
 		return recommended;
+    }
+    
+    public static ArrayList<Sport> getMySportsFromJSON(JSONObject jsonSports) 
+    {
+    	ArrayList<Sport> sports = new ArrayList<Sport>();
+    	
+		try {
+			JSONArray mySports = (JSONArray) jsonSports.getJSONArray("mySports");
+			
+			for (int i = 0; i < mySports.length(); i++) {    	
+		    	JSONObject row = mySports.getJSONObject(i);
+		    	Sport mysport = new Sport();
+		    	
+		    	JSONObject sport = (JSONObject) row.get("sport");
+		    	mysport.setName(sport.getString("name"));    		    	
+		    	mysport.setLevel(row.getInt("level"));
+		    	    
+		        sports.add(mysport);	    
+	    	}
+		} catch (JSONException e) {
+			
+		}            
+		return sports;
     }
     
 }
