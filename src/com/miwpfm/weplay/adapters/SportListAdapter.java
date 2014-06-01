@@ -43,7 +43,7 @@ public class SportListAdapter extends ArrayAdapter<Sport> {
 	    ViewHolder holder = (ViewHolder) rowView.getTag();
 	    Sport sport = sports.get(position);
 	    holder.name.setText(sport.getName());
-	    holder.level.setText(sport.getLevel());
+	    holder.level.setText(String.valueOf(sport.getLevel()));
 	    
 	    return rowView;
 	  }
