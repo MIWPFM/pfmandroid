@@ -29,13 +29,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 
 public class FragmentHome extends Fragment {
 	private RecommendedGamesTask task;
 	private ProgressDialog dialog;
 	private Activity parent;
+	 private ListView gamesList;
 	 
     @Override
     public View onCreateView(
@@ -161,9 +165,22 @@ public class FragmentHome extends Fragment {
 			dialog.dismiss();   			
    			if(success){
 	   			GameListAdapter adaptador = new GameListAdapter(getActivity(), recommendedGames);
-				ListView lstOpciones = (ListView)getActivity().findViewById(R.id.my_games_list);
-				 if(lstOpciones != null)
-					 	lstOpciones.setAdapter(adaptador);
+	   			gamesList = (ListView)getActivity().findViewById(R.id.my_games_list);
+				 if(gamesList != null){
+					 gamesList.setAdapter(adaptador);
+					 gamesList.setOnItemClickListener(new OnItemClickListener() {
+				            public void onItemClick(AdapterView<?> parent, View view,
+				                int position, long id) {
+
+				                // selected item
+				            	Game game= (Game) parent.getItemAtPosition(position);
+				                game.getId();
+				            	Toast toast=Toast.makeText(getActivity(), game.getId(), Toast.LENGTH_SHORT);
+				                toast.show();
+
+				            }
+				          });
+				 }
    			}
    		}
 

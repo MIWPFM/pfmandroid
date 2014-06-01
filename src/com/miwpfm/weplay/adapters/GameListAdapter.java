@@ -65,8 +65,9 @@ public class GameListAdapter extends ArrayAdapter<Game> {
 	    String date = dateFormat.format(game.getGameDate());
 	    String hour = hourFormat.format(game.getGameDate());
 	    holder.gameDate.setText(date);
-	    holder.hourDate.setText(hour);	    
-	    holder.distance.setText(game.getDistance().toString());
+	    holder.hourDate.setText(hour);	
+	    if(game.getDistance()>0)
+	    	holder.distance.setText(String.format("%.2f",game.getDistance())+"KM");
 	    
 	    return rowView;
 	  }

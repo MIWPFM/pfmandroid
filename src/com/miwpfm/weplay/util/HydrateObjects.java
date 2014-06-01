@@ -61,12 +61,12 @@ public class HydrateObjects {
 	    		JSONObject row = jsonGames.getJSONObject(i);
 	    		Game game = new Game();	   
 	    		
-	    		game.setDistance(row.getString("distance"));	    	    
+	    		game.setDistance(Float.valueOf(row.getString("distance")));	    	    
 	    	    JSONObject JSONgame = (JSONObject) row.get("game");    	    
 	    	    game.setId(JSONgame.getString("id"));
 	    	    
 	    	    JSONArray players = JSONgame.getJSONArray("players");
-	    	    game.setNumPlayers(players.length());    	    
+	    	    game.setNumPlayers(players.length()+1);    	    
 	    	    game.setMaxPlayers(JSONgame.getInt("num_players"));
 	    	    
 	    	    JSONObject sport = (JSONObject) JSONgame.get("sport");
@@ -74,15 +74,15 @@ public class HydrateObjects {
 	    	    JSONObject center = (JSONObject) JSONgame.get("center");
 	    	    game.setPlace(center.getString("name"));	  	    
 	    	    
-	    	    /*	    	    
+	    	    
 	    	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-	            String stringDate = game.getString("game_date");            
+	            String stringDate = JSONgame.getString("game_date");            
 	            try {
 					Date date =  df.parse(stringDate);
-					recommendedGame.setGameDate(date);
+					game.setGameDate(date);
 				} catch (ParseException e) {
 					e.printStackTrace();
-				}*/
+				}
 	    	    recommended.add(game);
 	    	    
     		} catch (JSONException e) {

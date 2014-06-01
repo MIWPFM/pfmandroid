@@ -9,10 +9,11 @@ public class Game {
 	private int maxPlayers;
 	private String sport;
 	private String place;
-	private String distance;
+	private float distance;
 	
 	public Game() {
 		super();
+		distance=-1;
 	}
 	
 	public String getId() {
@@ -57,10 +58,10 @@ public class Game {
 		this.maxPlayers = maxPlayers;
 	}
 
-	public String getDistance() {
+	public float getDistance() {
 		return distance;
 	}
-	public void setDistance(String distance) {
+	public void setDistance(float distance) {
 		this.distance = distance;
 	}
 
