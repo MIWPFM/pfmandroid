@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:gravity="left"
     android:padding="5dip" >
-    
-    
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:orientation="horizontal" >
+
         <TextView
             android:id="@+id/name"
-            android:layout_width="50sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Fútbol"
             android:textSize="14sp"
             android:textStyle="bold" />
-     
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/levelLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal" >
+
         <TextView
-	        android:id="@+id/level"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:gravity="right"
-	        android:textSize="14sp"
-	        android:textStyle="normal" />
-        
-        
+            android:id="@+id/level"
+            android:background="@drawable/star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="5"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+    </LinearLayout>
+
 </RelativeLayout>

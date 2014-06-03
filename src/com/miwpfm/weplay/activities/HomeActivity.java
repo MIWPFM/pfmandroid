@@ -18,14 +18,9 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.TextView;
 
 public class HomeActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks,
@@ -156,7 +151,7 @@ public class HomeActivity extends Activity implements
 		int id = item.getItemId();
 		if (id == R.id.find_game) {
 			mTitle = getString(R.string.menu_option_showgames);
-			fragment = new FragmentGame();
+			fragment = new FragmentShowGames();
 
 			FragmentManager fragmentManager = getFragmentManager();
 
@@ -191,6 +186,7 @@ public class HomeActivity extends Activity implements
 		startActivity(Intent.createChooser(sharingIntent, "Compártelo por"));
 	}
 
+	@Override
 	public void onGameSelected(String gameId) {
 		Fragment fragment = new FragmentGame();
 		Bundle args = new Bundle();

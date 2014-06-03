@@ -97,7 +97,7 @@ public class HydrateObjects {
     	ArrayList<Sport> sports = new ArrayList<Sport>();
     	
 		try {
-			JSONArray mySports = (JSONArray) jsonSports.getJSONArray("mySports");
+			JSONArray mySports = jsonSports.getJSONArray("mySports");
 			
 			for (int i = 0; i < mySports.length(); i++) {    	
 		    	JSONObject row = mySports.getJSONObject(i);

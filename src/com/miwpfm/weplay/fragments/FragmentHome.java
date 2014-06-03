@@ -4,9 +4,6 @@ package com.miwpfm.weplay.fragments;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.adapters.GameListAdapter;
 import com.miwpfm.weplay.model.Game;
@@ -17,15 +14,9 @@ import com.miwpfm.weplay.util.RestClient;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -145,7 +136,7 @@ public class FragmentHome extends Fragment {
    					case 200:
    						JSONArray recommendedJSON = null;
    						recommendedJSON = recommendedGamesClient.getJsonArrayResponse();
-   						recommendedGames = (ArrayList<Game>)HydrateObjects.getRecommendedGamesFromJSON(recommendedJSON);
+   						recommendedGames = HydrateObjects.getRecommendedGamesFromJSON(recommendedJSON);
    						valid = true;
 	   					break;
 	   					
@@ -169,7 +160,8 @@ public class FragmentHome extends Fragment {
 				 if(gamesList != null){
 					 gamesList.setAdapter(adaptador);
 					 gamesList.setOnItemClickListener(new OnItemClickListener() {
-				            public void onItemClick(AdapterView<?> parent, View view,
+				            @Override
+							public void onItemClick(AdapterView<?> parent, View view,
 				                int position, long id) {
 
 				                // selected item

@@ -19,10 +19,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class FragmentMySports extends Fragment {
 	private SportsTask task;
@@ -72,7 +69,7 @@ public class FragmentMySports extends Fragment {
    					case 200:
    						JSONObject sportJSON = null;
    						sportJSON = this.sportsClient.getJsonResponse();
-   						this.mySports = (ArrayList<Sport>)HydrateObjects.getMySportsFromJSON(sportJSON);
+   						this.mySports = HydrateObjects.getMySportsFromJSON(sportJSON);
    						valid = true;
 	   					break;
 	   					
