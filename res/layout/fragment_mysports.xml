@@ -7,20 +7,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.miwpfm.weplay.activities.HomeActivity$PlaceholderFragment" >
-
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/menu_option_mysports"  />
     
     <ListView
         android:id="@+id/my_sports_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/section_label" 
-        android:layout_marginTop="30sp" >
-
+        android:layout_height="wrap_content" >
     </ListView>
 
 </RelativeLayout>

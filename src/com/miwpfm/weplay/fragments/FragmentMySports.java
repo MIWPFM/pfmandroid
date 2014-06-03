@@ -11,6 +11,7 @@ import com.miwpfm.weplay.util.HydrateObjects;
 import com.miwpfm.weplay.util.Parameters;
 import com.miwpfm.weplay.util.RestClient;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -32,7 +33,12 @@ public class FragmentMySports extends Fragment {
         LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
     	
-    	this.parent = getActivity();
+    	this.parent = getActivity();parent = getActivity();
+		ActionBar actionBar = parent.getActionBar();
+		actionBar.removeAllTabs();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		actionBar.setTitle(getString(R.string.menu_option_mysports));
+		
     	this.task = new SportsTask(parent);
 		this.task.execute();
 		
