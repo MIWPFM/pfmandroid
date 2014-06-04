@@ -23,6 +23,7 @@ public class FragmentMyInfo extends Fragment {
     	
     	Activity parent=getActivity();
     	ActionBar actionBar= parent.getActionBar();
+    	actionBar.removeAllTabs();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setTitle(getString(R.string.menu_option_myinfo));
 		
