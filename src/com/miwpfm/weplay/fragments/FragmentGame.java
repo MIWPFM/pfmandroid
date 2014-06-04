@@ -1,5 +1,8 @@
 package com.miwpfm.weplay.fragments;
 
+import java.text.DecimalFormat;
+import java.util.Locale;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +19,7 @@ import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ParseException;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -190,7 +194,7 @@ public class FragmentGame extends Fragment {
 							+ gameInfo.getInt("num_players");
 					center = centerObject.getString("name");
 					city = addressObject.getString("city");
-					price = gameInfo.getString("price");
+					price = gameInfo.getString("price")+"€";
 					unsuscribeDate = gameInfo.getString("limit_date");
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block

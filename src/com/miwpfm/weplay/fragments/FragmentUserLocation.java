@@ -19,7 +19,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.util.Parameters;
 import com.miwpfm.weplay.util.RestClient;
@@ -144,25 +147,36 @@ public class FragmentUserLocation extends Fragment {
 			if (success) {
 				JSONObject addressObject;
 				JSONObject coordinatesObject;
+				String name = null;
 				String address = null;
 				String city = null;
 				String community = null;
 				String province = null;
+				Double x = null;
+				Double y = null;
 				dialog.dismiss();
 				try {
+					name = userLocation.getString("name");
 					addressObject = userLocation.getJSONObject("address");
 					coordinatesObject = addressObject
 							.getJSONObject("coordinates");
 					address = addressObject.getString("address");
 					city = addressObject.getString("city");
-					Double x = coordinatesObject.getDouble("x");
-					Double y = coordinatesObject.getDouble("y");
-					Log.e("AAAAAAAAAA", addressObject.toString());
-					Log.e("AAAAAAAAAA", Double.toString(x));
-					Log.e("AAAAAAAAAA", Double.toString(y));
+					x = coordinatesObject.getDouble("x");
+					y = coordinatesObject.getDouble("y");
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}
+				if (x != null || y != null) {
+			        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(x, y), 16);
+			        map.animateCamera(cameraUpdate);
+			        Marker home = map.addMarker(new MarkerOptions()
+			          .position(new LatLng(x, y))
+			          .title(name)
+			          .snippet(address)
+			          .icon(BitmapDescriptorFactory
+			              .fromResource(R.drawable.home_success)));
 				}
 
 				editAddress.setText(address);
