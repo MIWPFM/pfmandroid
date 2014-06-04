@@ -1,6 +1,9 @@
 package com.miwpfm.weplay.fragments;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import org.json.JSONArray;
@@ -10,7 +13,9 @@ import org.json.JSONObject;
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.util.Parameters;
 import com.miwpfm.weplay.util.RestClient;
+import com.miwpfm.weplay.util.Utils;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -23,6 +28,7 @@ import android.net.ParseException;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -85,7 +91,7 @@ public class FragmentGame extends Fragment {
 				}
 			}
 		});
-		
+
 		task = new GameTask();
 		task.execute((Void) null);
 
@@ -93,8 +99,8 @@ public class FragmentGame extends Fragment {
 	}
 
 	public void getCurrentLocation() {
-		LocationManager lm = (LocationManager) getActivity()
-				.getSystemService(Context.LOCATION_SERVICE);
+		LocationManager lm = (LocationManager) getActivity().getSystemService(
+				Context.LOCATION_SERVICE);
 		Criteria c = new Criteria();
 		String provider = lm.getBestProvider(c, false);
 		Location location = lm.getLastKnownLocation(provider);
@@ -162,9 +168,14 @@ public class FragmentGame extends Fragment {
 			return valid;
 		}
 
+		@SuppressLint("SimpleDateFormat")
 		@Override
 		protected void onPostExecute(final Boolean success) {
 			if (success) {
+				SimpleDateFormat formatterIn = new SimpleDateFormat(
+						"yyyy-MM-dd'T'HH:mm:ss");
+				SimpleDateFormat formatterOut = new SimpleDateFormat(
+						"dd/MM/yyyy");
 				JSONObject sportObject;
 				JSONObject centerObject;
 				JSONObject addressObject;
@@ -188,16 +199,17 @@ public class FragmentGame extends Fragment {
 					dlng = Double.toString(coordinatesObject.getDouble("y"));
 					playersArray = gameInfo.getJSONArray("players");
 					sport = sportObject.getString("name");
-					date = gameInfo.getString("game_date");
+					date = Utils.formatDate(gameInfo.getString("game_date"));
 					int numPlayers = playersArray.length() + 1;
 					vacancies = numPlayers + "/"
 							+ gameInfo.getInt("num_players");
 					center = centerObject.getString("name");
 					city = addressObject.getString("city");
-					price = gameInfo.getString("price")+"€";
-					unsuscribeDate = gameInfo.getString("limit_date");
+					price = gameInfo.getString("price") + "€";
+					unsuscribeDate = Utils.formatDate(gameInfo
+							.getString("limit_date"));
+
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				textSport.setText(sport);

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.util.Parameters;
 import com.miwpfm.weplay.util.RestClient;
+import com.miwpfm.weplay.util.Utils;
 
 public class FragmentUserInfo extends Fragment {
 	EditText editUsername;
@@ -107,7 +108,7 @@ public class FragmentUserInfo extends Fragment {
 					name = userInfo.getString("name");
 					username = userInfo.getString("username");
 					email = userInfo.getString("email");
-					birthday = userInfo.getString("birthday");
+					birthday = Utils.formatDate(userInfo.getString("birthday"));
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

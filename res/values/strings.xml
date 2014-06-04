@@ -46,12 +46,9 @@
     <string name="my_info_save_changes">Guardar Cambios</string>
 
     <!-- game -->
-    <string name="game_vacancies">Plazas:</string>
-    <string name="game_price">Precio:</string>
-    <string name="game_unsuscribe_limit">Límite de Baja:</string>
+    <string name="game_vacancies">Plazas: </string>
+    <string name="game_price">Precio: </string>
+    <string name="game_unsuscribe_limit">Límite de Baja: </string>
     <string name="game_how_to_go">Cómo llego</string>
-    <string name="title_activity_map">MapActivity</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
 
 </resources>
