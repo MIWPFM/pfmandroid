@@ -2,9 +2,9 @@ package com.miwpfm.weplay.fragments;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 
 import com.miwpfm.weplay.R;
@@ -37,7 +37,7 @@ public class FragmentHome extends Fragment {
 	private ProgressDialog dialog;
 	private Activity parent;
 	private ListView gamesList;
-	private Map<String, String> myPosition = new HashMap<String, String>(); 
+	private ArrayList<NameValuePair> myPosition = new ArrayList<NameValuePair>();
 	 
     @Override
     public View onCreateView(
@@ -45,49 +45,36 @@ public class FragmentHome extends Fragment {
         Bundle savedInstanceState) {
     	
     	this.parent = getActivity();
-    	this.myPosition = this.initLocation(this.parent);
-    	this.task = new RecommendedGamesTask(this.parent, this.myPosition);
-		this.task.execute();
- 
+    	this.initLocation(this.parent);
+    	this.task = new RecommendedGamesTask(this.parent);
+    	this.task.execute(this.myPosition);
+    	
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
     
-    private Map<String, String> initLocation(Activity parent)
+    private void initLocation(Activity parent)
     {
-    	/*LocationManager locManager = (LocationManager)parent.getSystemService(parent.LOCATION_SERVICE);
-            	MyLocationListener myListener = new MyLocationListener();
-        myListener.setActivity(parent);
-                locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener)myListener);
-                Location loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);         
-        return myListener.setLocation(loc);*/
-    	
     	Criteria c = new Criteria();
-    	Map<String, String> locationArray = new HashMap<String, String>();
     	LocationManager locManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 		String provider = locManager.getBestProvider(c, false);
 		Location location = locManager.getLastKnownLocation(provider);
 		
 		if (location != null) {
-			locationArray.put("lat", Double.toString(location.getLatitude()));
-			locationArray.put("long", Double.toString(location.getLongitude()));
-		} else
-			locationArray = null;
-		
-		return locationArray;
+			this.myPosition.add(new BasicNameValuePair("lat", Double.toString(location.getLatitude()))); 
+			this.myPosition.add(new BasicNameValuePair("long", Double.toString(location.getLongitude())));
+			//[lat=40.5126015, long=-3.6741866]
+		}		
     }
     
-	public class RecommendedGamesTask extends AsyncTask<Void, Void, Boolean> {		
+    public class RecommendedGamesTask extends AsyncTask <ArrayList<NameValuePair>, Void, Boolean> {		
 		private Activity context;
 		private RestClient recommendedGamesClient;
 		private ArrayList<Game> recommendedGames = new ArrayList<Game>();
 		
-		public RecommendedGamesTask(Activity parent, Map<String, String> position) {
+		public RecommendedGamesTask(Activity parent) {
    			super();
    			this.context = parent;
-   			if(position == null)
-   				this.recommendedGamesClient = new RestClient(Parameters.API_URL + "me/recommended-games");
-   			else
-   				this.recommendedGamesClient = new RestClient(Parameters.API_URL + "me/recommended-games/" + position);
+   			this.recommendedGamesClient = new RestClient(Parameters.API_URL + "me/recommended-games");
    		}
 		
 		@Override
@@ -100,8 +87,12 @@ public class FragmentHome extends Fragment {
    		}
 		
 		@Override
-   		protected Boolean doInBackground(Void... params) {
+   		protected Boolean doInBackground(ArrayList<NameValuePair>... params) {
    			boolean valid = false;
+   			if(!myPosition.isEmpty()) {
+	   			this.recommendedGamesClient.AddParam("lat", myPosition.get(0).getValue());
+				this.recommendedGamesClient.AddParam("long", myPosition.get(1).getValue());
+   			}
    			try {
    				this.recommendedGamesClient.Execute(RestClient.RequestMethod.GET);
    				switch (this.recommendedGamesClient.getResponseCode()) {

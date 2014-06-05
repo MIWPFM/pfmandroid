@@ -18,6 +18,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -53,8 +54,7 @@ public class RestClient {
     }
     
     public JSONObject getJsonResponse() throws JSONException{
-    	JSONObject json = new JSONObject(response);
-    	
+    	JSONObject json = new JSONObject(response);    	
 		return json;
     }
     
@@ -76,9 +76,25 @@ public class RestClient {
         this.url = url;
         params = new ArrayList<NameValuePair>();
         headers = new ArrayList<NameValuePair>();
-    }
+    }    
+    
+    public ArrayList<NameValuePair> getParams() {
+		return params;
+	}
 
-    public void AddParam(String name, String value)
+	public void setParams(ArrayList<NameValuePair> params) {
+		this.params = params;
+	}
+
+	public ArrayList<NameValuePair> getHeaders() {
+		return headers;
+	}
+
+	public void setHeaders(ArrayList<NameValuePair> headers) {
+		this.headers = headers;
+	}
+
+	public void AddParam(String name, String value)
     {
         params.add(new BasicNameValuePair(name, value));
     }
@@ -95,30 +111,38 @@ public class RestClient {
             {
                 //add parameters
                 String combinedParams = "";
+                //api/me/recommended-games?{lat=40.5126674,long=-3.6742816}
                 if(!params.isEmpty()){
-                    combinedParams += "?";
+                    combinedParams += "?{";
+                    //combinedParams += "?";
                     for(NameValuePair p : params)
                     {
                         String paramString = p.getName() + "=" + URLEncoder.encode(p.getValue(),"UTF-8");
                         if(combinedParams.length() > 1)
                         {
-                            combinedParams  +=  "&" + paramString;
+                            combinedParams  +=  "," + paramString;
+                            //combinedParams  +=  "&" + paramString;
                         }
                         else
                         {
                             combinedParams += paramString;
                         }
                     }
+                    //esta no estaba
+                    combinedParams += "}";
                 }
-
+                ////app_dev.php/api/me/recommended-games?{lat=40.5126674,long=-3.6742816}
+                
                 HttpGet request = new HttpGet(url + combinedParams);
-
+                
                 //add headers
-                for(NameValuePair h : headers)
-                {
-                    request.addHeader(h.getName(), h.getValue());
+                if(!headers.isEmpty()){
+	                for(NameValuePair h : headers)
+	                {
+	                    request.addHeader(h.getName(), h.getValue());
+	                }
                 }
-
+               
                 executeRequest(request, url);
                 break;
             }
