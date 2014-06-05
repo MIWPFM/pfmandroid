@@ -11,6 +11,7 @@ import com.miwpfm.weplay.util.HydrateObjects;
 import com.miwpfm.weplay.util.Parameters;
 import com.miwpfm.weplay.util.RestClient;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -20,9 +21,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class FragmentMySports extends Fragment {
 	private SportsTask task;
@@ -35,7 +36,12 @@ public class FragmentMySports extends Fragment {
         LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
     	
-    	this.parent = getActivity();
+    	this.parent = getActivity();parent = getActivity();
+		ActionBar actionBar = parent.getActionBar();
+		actionBar.removeAllTabs();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		actionBar.setTitle(getString(R.string.menu_option_mysports));
+		
     	this.task = new SportsTask(parent);
 		this.task.execute();
 		
@@ -72,7 +78,7 @@ public class FragmentMySports extends Fragment {
    					case 200:
    						JSONObject sportJSON = null;
    						sportJSON = this.sportsClient.getJsonResponse();
-   						this.mySports = (ArrayList<Sport>)HydrateObjects.getMySportsFromJSON(sportJSON);
+   						this.mySports = HydrateObjects.getMySportsFromJSON(sportJSON);
    						valid = true;
 	   					break;
 	   					

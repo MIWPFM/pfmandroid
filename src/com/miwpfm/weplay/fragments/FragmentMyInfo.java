@@ -25,7 +25,7 @@ public class FragmentMyInfo extends Fragment {
     	ActionBar actionBar= parent.getActionBar();
     	actionBar.removeAllTabs();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		actionBar.setTitle(getString(R.string.menu_option_mygames));
+		actionBar.setTitle(getString(R.string.menu_option_myinfo));
 		
 	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
 

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
-
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.adapters.GameListAdapter;
 import com.miwpfm.weplay.model.Game;
@@ -125,7 +124,8 @@ public class FragmentHome extends Fragment {
 	   			if(gamesList != null){
 					 gamesList.setAdapter(adaptador);
 					 gamesList.setOnItemClickListener(new OnItemClickListener() {
-				            public void onItemClick(AdapterView<?> parent, View view,
+				            @Override
+							public void onItemClick(AdapterView<?> parent, View view,
 				                int position, long id) {
 
 				                // selected item

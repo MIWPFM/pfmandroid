@@ -19,7 +19,7 @@ public class FragmentUserPassword extends Fragment {
         LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.fragment_user_password, null,
+		View view = inflater.inflate(R.layout.fragment_user_password, container,
 				false);
 		editOldPassword = (EditText) view.findViewById(R.id.editOldPassword);
 		editNewPassword = (EditText) view.findViewById(R.id.editNewPassword);

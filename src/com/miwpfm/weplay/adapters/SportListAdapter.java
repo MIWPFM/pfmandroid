@@ -2,11 +2,13 @@ package com.miwpfm.weplay.adapters;
 
 import java.util.ArrayList;
 
+import android.R.integer;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miwpfm.weplay.R;
@@ -18,7 +20,7 @@ public class SportListAdapter extends ArrayAdapter<Sport> {
 	
 	static class ViewHolder {
 	    public TextView name;
-	    public TextView level;
+	    public ImageView level;
 	}
 	
 	public SportListAdapter(Context context, ArrayList<Sport> sports) {
@@ -36,14 +38,17 @@ public class SportListAdapter extends ArrayAdapter<Sport> {
 		      
 		      ViewHolder viewHolder = new ViewHolder();
 		      viewHolder.name = (TextView) rowView.findViewById(R.id.name);
-		      viewHolder.level = (TextView) rowView.findViewById(R.id.level);
+		      viewHolder.level = (ImageView) rowView.findViewById(R.id.level);
 		      rowView.setTag(viewHolder);
 	    }
 
 	    ViewHolder holder = (ViewHolder) rowView.getTag();
 	    Sport sport = sports.get(position);
+	    String imageName = "star_" + String.valueOf(sport.getLevel());
+	    int imageId = context.getResources().getIdentifier(imageName,
+                "drawable", context.getPackageName());
 	    holder.name.setText(sport.getName());
-	    holder.level.setText(String.valueOf(sport.getLevel()));
+	    holder.level.setImageResource(imageId);
 	    
 	    return rowView;
 	  }

@@ -19,15 +19,12 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class FragmentMyGames extends Fragment {
 	private ProgressDialog mProgressDialog;
@@ -150,7 +147,7 @@ public class FragmentMyGames extends Fragment {
 				case 200:
 					JSONObject playingGames = null;
 					playingGames = playingGamesClient.getJsonResponse();
-					games = (ArrayList<Game>) HydrateObjects
+					games = HydrateObjects
 							.getGamesFromJSON(playingGames);
 					valid = true;
 					break;
@@ -179,16 +176,17 @@ public class FragmentMyGames extends Fragment {
 					gamesList.setAdapter(adaptador);
 
 					gamesList.setOnItemClickListener(new OnItemClickListener() {
+						@Override
 						public void onItemClick(AdapterView<?> parent,
 								View view, int position, long id) {
 
 							// selected item
 							Game game = (Game) parent
 									.getItemAtPosition(position);
-							game.getId();
-							Toast toast = Toast.makeText(getActivity(),
-									game.getId(), Toast.LENGTH_SHORT);
-							toast.show();
+							String gameId = game.getId();
+							if (gameId != null) {
+								mCallback.onGameSelected(gameId);
+							}
 
 						}
 					});
@@ -236,7 +234,7 @@ public class FragmentMyGames extends Fragment {
 				case 200:
 					JSONObject playedGames = null;
 					playedGames = playedGamesClient.getJsonResponse();
-					games = (ArrayList<Game>) HydrateObjects
+					games = HydrateObjects
 							.getGamesFromJSON(playedGames);
 					valid = true;
 					break;
@@ -264,6 +262,7 @@ public class FragmentMyGames extends Fragment {
 				if (gamesList != null) {
 					gamesList.setAdapter(adaptador);
 					gamesList.setOnItemClickListener(new OnItemClickListener() {
+						@Override
 						public void onItemClick(AdapterView<?> parent,
 								View view, int position, long id) {
 
@@ -271,9 +270,9 @@ public class FragmentMyGames extends Fragment {
 							Game game = (Game) parent
 									.getItemAtPosition(position);
 							String gameId = game.getId();
-							Toast toast = Toast.makeText(getActivity(), gameId,
-									Toast.LENGTH_SHORT);
-							toast.show();
+							if (gameId != null) {
+								mCallback.onGameSelected(gameId);
+							}
 
 						}
 					});
@@ -321,7 +320,7 @@ public class FragmentMyGames extends Fragment {
 				case 200:
 					JSONObject organizedGames = null;
 					organizedGames = organizedClient.getJsonResponse();
-					games = (ArrayList<Game>) HydrateObjects
+					games = HydrateObjects
 							.getGamesFromJSON(organizedGames);
 					valid = true;
 					break;
@@ -349,15 +348,13 @@ public class FragmentMyGames extends Fragment {
 				if (gamesList != null) {
 					gamesList.setAdapter(adaptador);
 					gamesList.setOnItemClickListener(new OnItemClickListener() {
+						@Override
 						public void onItemClick(AdapterView<?> parent,
 								View view, int position, long id) {
 							// selected item
 							Game game = (Game) parent
 									.getItemAtPosition(position);
 							String gameId = game.getId();
-							Toast toast = Toast.makeText(getActivity(), gameId,
-									Toast.LENGTH_SHORT);
-							toast.show();
 							if (gameId != null) {
 								mCallback.onGameSelected(gameId);
 							}
