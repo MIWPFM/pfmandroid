@@ -2,10 +2,13 @@ package com.miwpfm.weplay.fragments;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.adapters.GameListAdapter;
 import com.miwpfm.weplay.model.Game;
@@ -36,7 +39,8 @@ public class FragmentHome extends Fragment {
 	private ProgressDialog dialog;
 	private Activity parent;
 	private ListView gamesList;
-	private ArrayList<NameValuePair> myPosition = new ArrayList<NameValuePair>();
+	//private ArrayList<NameValuePair> myPosition = new ArrayList<NameValuePair>();
+	private Map<String, String> myPosition = new HashMap<String, String>();
 	 
     @Override
     public View onCreateView(
@@ -46,7 +50,8 @@ public class FragmentHome extends Fragment {
     	this.parent = getActivity();
     	this.initLocation(this.parent);
     	this.task = new RecommendedGamesTask(this.parent);
-    	this.task.execute(this.myPosition);
+    	this.task.execute(this.myPosition.get("lat"), this.myPosition.get("long"));
+    	//this.task.execute();
     	
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
@@ -59,13 +64,15 @@ public class FragmentHome extends Fragment {
 		Location location = locManager.getLastKnownLocation(provider);
 		
 		if (location != null) {
-			this.myPosition.add(new BasicNameValuePair("lat", Double.toString(location.getLatitude()))); 
-			this.myPosition.add(new BasicNameValuePair("long", Double.toString(location.getLongitude())));
+			//this.myPosition.add(new BasicNameValuePair("lat", Double.toString(location.getLatitude()))); 
+			//this.myPosition.add(new BasicNameValuePair("long", Double.toString(location.getLongitude())));
 			//[lat=40.5126015, long=-3.6741866]
+			this.myPosition.put("lat", Double.toString(location.getLatitude()));
+			this.myPosition.put("long", Double.toString(location.getLongitude()));
 		}		
     }
     
-    public class RecommendedGamesTask extends AsyncTask <ArrayList<NameValuePair>, Void, Boolean> {		
+    public class RecommendedGamesTask extends AsyncTask <String, Void, Boolean> {		
 		private Activity context;
 		private RestClient recommendedGamesClient;
 		private ArrayList<Game> recommendedGames = new ArrayList<Game>();
@@ -86,12 +93,13 @@ public class FragmentHome extends Fragment {
    		}
 		
 		@Override
-   		protected Boolean doInBackground(ArrayList<NameValuePair>... params) {
+   		protected Boolean doInBackground(String... params) {
    			boolean valid = false;
    			if(!myPosition.isEmpty()) {
-	   			this.recommendedGamesClient.AddParam("lat", myPosition.get(0).getValue());
-				this.recommendedGamesClient.AddParam("long", myPosition.get(1).getValue());
+	   			this.recommendedGamesClient.AddParam("lat", params[0]);
+				this.recommendedGamesClient.AddParam("long", params[1]);
    			}
+   			
    			try {
    				this.recommendedGamesClient.Execute(RestClient.RequestMethod.GET);
    				switch (this.recommendedGamesClient.getResponseCode()) {

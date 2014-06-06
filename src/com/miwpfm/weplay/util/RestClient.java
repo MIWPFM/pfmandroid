@@ -74,8 +74,8 @@ public class RestClient {
     public RestClient(String url)
     {
         this.url = url;
-        params = new ArrayList<NameValuePair>();
-        headers = new ArrayList<NameValuePair>();
+        this.params = new ArrayList<NameValuePair>();
+        this.headers = new ArrayList<NameValuePair>();
     }    
     
     public ArrayList<NameValuePair> getParams() {
@@ -96,7 +96,7 @@ public class RestClient {
 
 	public void AddParam(String name, String value)
     {
-        params.add(new BasicNameValuePair(name, value));
+        this.params.add(new BasicNameValuePair(name, value));
     }
 
     public void AddHeader(String name, String value)
@@ -112,28 +112,32 @@ public class RestClient {
                 //add parameters
                 String combinedParams = "";
                 //api/me/recommended-games?{lat=40.5126674,long=-3.6742816}
-                if(!params.isEmpty()){
-                    combinedParams += "?{";
-                    //combinedParams += "?";
-                    for(NameValuePair p : params)
+                //api/me/recommended-games?lat=40.5126093&long=-3.6742078
+                if(!this.params.isEmpty()){
+                	//String paramsString = URLEncodedUtils.format(this.params, "UTF-8");
+                	//combinedParams += "?{";
+                    combinedParams += "?";
+                    for(NameValuePair p : this.params)
                     {
                         String paramString = p.getName() + "=" + URLEncoder.encode(p.getValue(),"UTF-8");
                         if(combinedParams.length() > 1)
                         {
-                            combinedParams  +=  "," + paramString;
-                            //combinedParams  +=  "&" + paramString;
+                            //combinedParams  +=  "," + paramString;
+                            combinedParams  +=  "&" + paramString;
                         }
                         else
                         {
-                            combinedParams += paramString;
+                            //combinedParams += paramString;
                         }
                     }
                     //esta no estaba
-                    combinedParams += "}";
+                   //combinedParams += "}";
                 }
                 ////app_dev.php/api/me/recommended-games?{lat=40.5126674,long=-3.6742816}
                 
-                HttpGet request = new HttpGet(url + combinedParams);
+                url += combinedParams;
+                //HttpGet request = new HttpGet(url + combinedParams);
+                HttpGet request = new HttpGet(url);
                 
                 //add headers
                 if(!headers.isEmpty()){
@@ -186,12 +190,15 @@ public class RestClient {
     private void executeRequest(HttpUriRequest request, String url)
     {
         HttpClient client = new DefaultHttpClient();
-        HttpContext context=RestClient.getHttpContextInstance();
+        HttpContext context = RestClient.getHttpContextInstance();
         context.setAttribute(ClientContext.COOKIE_STORE, RestClient.getCookieStoreInstance());
         HttpResponse httpResponse;
 
         try {
-            httpResponse = client.execute(request,context);
+        	//Encapsulamos        	
+            //((HttpResponse) request).setEntity(new UrlEncodedFormEntity(params)); 
+            
+        	httpResponse = client.execute(request,context);
             responseCode = httpResponse.getStatusLine().getStatusCode();
             message = httpResponse.getStatusLine().getReasonPhrase();
 
@@ -205,6 +212,7 @@ public class RestClient {
                 // Closing the input stream will trigger connection release
                 instream.close();
             }
+           
 
         } catch (ClientProtocolException e)  {
             client.getConnectionManager().shutdown();
