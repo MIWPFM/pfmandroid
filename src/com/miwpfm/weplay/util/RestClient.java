@@ -114,26 +114,21 @@ public class RestClient {
                 //api/me/recommended-games?{lat=40.5126674,long=-3.6742816}
                 //api/me/recommended-games?lat=40.5126093&long=-3.6742078
                 if(!this.params.isEmpty()){
-                	//String paramsString = URLEncodedUtils.format(this.params, "UTF-8");
-                	//combinedParams += "?{";
-                    combinedParams += "?";
+                	combinedParams += "?";
                     for(NameValuePair p : this.params)
                     {
                         String paramString = p.getName() + "=" + URLEncoder.encode(p.getValue(),"UTF-8");
                         if(combinedParams.length() > 1)
-                        {
-                            //combinedParams  +=  "," + paramString;
+                       {
                             combinedParams  +=  "&" + paramString;
                         }
                         else
                         {
-                            //combinedParams += paramString;
+                            combinedParams += paramString;
                         }
                     }
-                    //esta no estaba
-                   //combinedParams += "}";
+                    
                 }
-                ////app_dev.php/api/me/recommended-games?{lat=40.5126674,long=-3.6742816}
                 
                 url += combinedParams;
                 //HttpGet request = new HttpGet(url + combinedParams);
