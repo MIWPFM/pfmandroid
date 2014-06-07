@@ -2,6 +2,7 @@ package com.miwpfm.weplay.fragments;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.miwpfm.weplay.R;
@@ -123,8 +124,7 @@ public class FragmentMyGames extends Fragment {
 		public PlayingGamesTask(Activity parent) {
 			super();
 			context = parent;
-			playingGamesClient = new RestClient(Parameters.API_URL
-					+ "me/playing-games");
+			playingGamesClient = new RestClient(Parameters.API_URL+ "me/playing-games");
 		}
 
 		@Override
@@ -145,10 +145,9 @@ public class FragmentMyGames extends Fragment {
 				playingGamesClient.Execute(RestClient.RequestMethod.GET);
 				switch (playingGamesClient.getResponseCode()) {
 				case 200:
-					JSONObject playingGames = null;
-					playingGames = playingGamesClient.getJsonResponse();
-					games = HydrateObjects
-							.getGamesFromJSON(playingGames);
+					JSONArray playingGames = null;
+					playingGames = playingGamesClient.getJsonArrayResponse();
+					games = HydrateObjects.getGamesFromJSON(playingGames);
 					valid = true;
 					break;
 				case 404:
@@ -232,10 +231,9 @@ public class FragmentMyGames extends Fragment {
 				playedGamesClient.Execute(RestClient.RequestMethod.GET);
 				switch (playedGamesClient.getResponseCode()) {
 				case 200:
-					JSONObject playedGames = null;
-					playedGames = playedGamesClient.getJsonResponse();
-					games = HydrateObjects
-							.getGamesFromJSON(playedGames);
+					JSONArray playedGames = null;
+					playedGames = playedGamesClient.getJsonArrayResponse();
+					games = HydrateObjects.getGamesFromJSON(playedGames);
 					valid = true;
 					break;
 				case 404:
@@ -318,8 +316,8 @@ public class FragmentMyGames extends Fragment {
 				organizedClient.Execute(RestClient.RequestMethod.GET);
 				switch (organizedClient.getResponseCode()) {
 				case 200:
-					JSONObject organizedGames = null;
-					organizedGames = organizedClient.getJsonResponse();
+					JSONArray organizedGames = null;
+					organizedGames = organizedClient.getJsonArrayResponse();
 					games = HydrateObjects
 							.getGamesFromJSON(organizedGames);
 					valid = true;

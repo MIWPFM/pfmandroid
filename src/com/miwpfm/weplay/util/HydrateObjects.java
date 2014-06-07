@@ -16,15 +16,16 @@ import com.miwpfm.weplay.model.Sport;
 
 public class HydrateObjects {
 	
-    public static ArrayList<Game> getGamesFromJSON(JSONObject json)
+    public static ArrayList<Game> getGamesFromJSON(JSONArray json) throws JSONException
     {
-    	Iterator<String> iter = json.keys();
+  
     	ArrayList<Game> games = new ArrayList<Game>();
     	
-        while (iter.hasNext()) {
-            String key = iter.next();
+    	for (int i = 0; i < json.length(); i++) {
+    		JSONObject value = (JSONObject) json.get(i);
+		
             try {
-                JSONObject value = (JSONObject) json.get(key);
+                
                 JSONObject center =(JSONObject) value.get("center");
                 JSONObject sport =(JSONObject) value.get("sport");
                 JSONArray players = value.getJSONArray("players");
@@ -50,7 +51,8 @@ public class HydrateObjects {
 
             }
         }
-		return games;    	
+		return games;    
+
     }
     
     public static ArrayList<Game> getRecommendedGamesFromJSON(JSONArray jsonGames) 

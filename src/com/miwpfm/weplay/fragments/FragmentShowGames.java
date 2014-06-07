@@ -2,6 +2,7 @@ package com.miwpfm.weplay.fragments;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.miwpfm.weplay.R;
@@ -74,10 +75,9 @@ public class FragmentShowGames extends Fragment {
 				gamesClient.Execute(RestClient.RequestMethod.GET);
 				switch (gamesClient.getResponseCode()) {
 				case 200:
-					JSONObject gamesJson = null;
-					gamesJson = gamesClient.getJsonResponse();
-					games = HydrateObjects
-							.getGamesFromJSON(gamesJson);
+					JSONArray gamesJson = null;
+					gamesJson = gamesClient.getJsonArrayResponse();
+					games = HydrateObjects.getGamesFromJSON(gamesJson);
 					valid = true;
 					break;
 				case 404:
