@@ -20,10 +20,12 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -31,6 +33,7 @@ import android.widget.ListView;
 public class FragmentMyGames extends Fragment {
 	private ProgressDialog mProgressDialog;
 	private Activity parent;
+	private TextView txtTotal;
 	private ListView gamesList;
 	OnGameSelectedListener mCallback;
 
@@ -56,12 +59,13 @@ public class FragmentMyGames extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
+		View view = inflater.inflate(R.layout.fragment_mygames, container, false);
 		parent = getActivity();
 		ActionBar actionBar = parent.getActionBar();
 		actionBar.removeAllTabs();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setTitle(getString(R.string.menu_option_mygames));
+		txtTotal = (TextView) view.findViewById(R.id.txt_games_total);
 
 		ActionBar.TabListener tabListener = new ActionBar.TabListener() {
 			RestClient gamesClient;
@@ -112,7 +116,7 @@ public class FragmentMyGames extends Fragment {
 				.setText(getString(R.string.my_games_tab_organized))
 				.setTabListener(tabListener));
 
-		return inflater.inflate(R.layout.fragment_mygames, container, false);
+		return view;
 	}
 
 	public class PlayingGamesTask extends AsyncTask<Void, Void, Boolean> {
@@ -170,6 +174,8 @@ public class FragmentMyGames extends Fragment {
 			if (success) {
 				GameListAdapter adaptador = new GameListAdapter(getActivity(),
 						games);
+				String strTotal = getString(R.string.found_games_init) + " " + Integer.toString(adaptador.getCount()) + " " + getString(R.string.found_games_end);
+				txtTotal.setText(strTotal);
 				gamesList = (ListView) getActivity().findViewById(
 						R.id.my_games_list);
 				if (gamesList != null) {
@@ -256,6 +262,8 @@ public class FragmentMyGames extends Fragment {
 			if (success) {
 				GameListAdapter adaptador = new GameListAdapter(getActivity(),
 						games);
+				String strTotal = getString(R.string.found_games_init) + " " + Integer.toString(adaptador.getCount()) + " " + getString(R.string.found_games_end);
+				txtTotal.setText(strTotal);
 				gamesList = (ListView) getActivity().findViewById(
 						R.id.my_games_list);
 				if (gamesList != null) {
@@ -342,6 +350,8 @@ public class FragmentMyGames extends Fragment {
 			if (success) {
 				GameListAdapter adaptador = new GameListAdapter(getActivity(),
 						games);
+				String strTotal = getString(R.string.found_games_init) + " " + Integer.toString(adaptador.getCount()) + " " + getString(R.string.found_games_end);
+				txtTotal.setText(strTotal);
 				gamesList = (ListView) getActivity().findViewById(
 						R.id.my_games_list);
 				if (gamesList != null) {

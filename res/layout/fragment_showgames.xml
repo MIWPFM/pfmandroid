@@ -8,11 +8,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.miwpfm.weplay.activities.HomeActivity$PlaceholderFragment" >
 
+    <TextView
+        android:id="@+id/txt_games_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="30sp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+
     <ListView
         android:id="@+id/games"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/section_label" >
+        android:layout_alignLeft="@+id/txt_games_total" >
 
     </ListView>
 

@@ -24,12 +24,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 public class FragmentShowGames extends Fragment {
 	private ProgressDialog mProgressDialog;
 	private GamesTask task;
+	private TextView txtTotal;
 	private ListView gamesList;
 	OnGameSelectedListener mCallback;
 
@@ -55,11 +57,13 @@ public class FragmentShowGames extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_showgames, container, false);
+		txtTotal = (TextView) view.findViewById(R.id.txt_games_total);
 
 		task = new GamesTask(getActivity());
 		task.execute((Void) null);
 
-		return inflater.inflate(R.layout.fragment_showgames, container, false);
+		return view;
 	}
 
 	public class GamesTask extends AsyncTask<Void, Void, Boolean> {
@@ -116,6 +120,8 @@ public class FragmentShowGames extends Fragment {
 			if (success) {
 				GameListAdapter adaptador = new GameListAdapter(getActivity(),
 						games);
+				String strTotal = getString(R.string.found_games_init) + " " + Integer.toString(adaptador.getCount()) + " " + getString(R.string.found_games_end);
+				txtTotal.setText(strTotal);
 				gamesList = (ListView) getActivity().findViewById(R.id.games);
 				if (gamesList != null) {
 					gamesList.setAdapter(adaptador);

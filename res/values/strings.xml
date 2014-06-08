@@ -7,7 +7,7 @@
     <string name="share_app">Compartir app</string>
     <string name="overflow">Más</string>
     <string name="menu_option_home">Inicio</string>
-    <string name="menu_option_myrecommenders">Te recomendamos los siguientes partidos:</string>
+    <string name="menu_option_recommended">Te recomendamos los siguientes partidos:</string>
     <string name="menu_option_myinfo">Mis Datos</string>
     <string name="menu_option_mygames">Mis Partidos</string>
     <string name="menu_option_show_game">Ver Partido</string>
@@ -23,6 +23,9 @@
     <string name="loading_game">Cargando partido</string>
     <string name="error_loading">Lo siento, no ha sido posible cargar sus datos.</string>
     <string name="error_loading_game">Lo siento, no ha sido posible cargar el partido.</string>
+    <string name="found_games_init">Se han encontrado</string>
+    <string name="found_games_end">partidos.</string>
+    <string name="not_found_games">No se han encontrado partidos que se ajusten a tus características.</string>
 
     <!-- my games -->
     <string name="my_games_tab_playing">Jugando </string>

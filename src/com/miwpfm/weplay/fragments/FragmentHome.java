@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -36,6 +37,7 @@ public class FragmentHome extends Fragment {
 	private RecommendedGamesTask task;
 	private ProgressDialog dialog;
 	private Activity parent;
+	private TextView txtRecommended;
 	private ListView gamesList;
 	private Map<String, String> myPosition = new HashMap<String, String>();
 	 
@@ -43,13 +45,14 @@ public class FragmentHome extends Fragment {
     public View onCreateView(
         LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
-    	
+    	View view = inflater.inflate(R.layout.fragment_home, container, false);
     	this.parent = getActivity();
     	this.initLocation(this.parent);
+    	txtRecommended = (TextView) view.findViewById(R.id.txt_recommended);
     	this.task = new RecommendedGamesTask(this.parent);
     	this.task.execute(this.myPosition.get("lat"), this.myPosition.get("long"));
     	
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return view;
     }
     
     private void initLocation(Activity parent)
@@ -120,6 +123,10 @@ public class FragmentHome extends Fragment {
 			dialog.dismiss();   			
    			if(success){
 	   			GameListAdapter adaptador = new GameListAdapter(getActivity(), this.recommendedGames);
+	   			if (adaptador.getCount() == 0) {
+	   				txtRecommended.setText(getString(R.string.not_found_games));
+				}
+				
 	   			gamesList = (ListView)getActivity().findViewById(R.id.my_games_list);
 				 
 	   			if(gamesList != null){
