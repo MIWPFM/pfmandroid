@@ -18,13 +18,15 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 
 public class HomeActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks,
-		FragmentMyGames.OnGameSelectedListener {
+		FragmentMyGames.OnGameSelectedListener,
+		FragmentShowGames.OnGameSelectedListener {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the

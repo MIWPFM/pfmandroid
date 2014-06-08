@@ -22,6 +22,7 @@
     <string name="loading_my_info_location">Cargando localización</string>
     <string name="loading_game">Cargando partido</string>
     <string name="error_loading">Lo siento, no ha sido posible cargar sus datos.</string>
+    <string name="error_loading_game">Lo siento, no ha sido posible cargar el partido.</string>
 
     <!-- my games -->
     <string name="my_games_tab_playing">Jugando </string>

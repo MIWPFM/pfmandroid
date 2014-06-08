@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -355,6 +356,8 @@ public class FragmentMyGames extends Fragment {
 							String gameId = game.getId();
 							if (gameId != null) {
 								mCallback.onGameSelected(gameId);
+							} else {
+								Toast.makeText(getActivity(), getString(R.string.error_loading_game), Toast.LENGTH_SHORT).show();
 							}
 						}
 					});

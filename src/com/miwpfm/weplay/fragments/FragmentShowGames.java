@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.adapters.GameListAdapter;
+import com.miwpfm.weplay.fragments.FragmentMyGames.OnGameSelectedListener;
 import com.miwpfm.weplay.model.Game;
 import com.miwpfm.weplay.util.HydrateObjects;
 import com.miwpfm.weplay.util.Parameters;
@@ -17,12 +18,14 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class FragmentShowGames extends Fragment {
 	private ProgressDialog mProgressDialog;
@@ -33,6 +36,20 @@ public class FragmentShowGames extends Fragment {
 	// Container Activity must implement this interface
 	public interface OnGameSelectedListener {
 		public void onGameSelected(String gameId);
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+
+		// This makes sure that the container activity has implemented
+		// the callback interface. If not, it throws an exception
+		try {
+			mCallback = (OnGameSelectedListener) activity;
+		} catch (ClassCastException e) {
+			throw new ClassCastException(activity.toString()
+					+ " must implement OnGameSelectedListener");
+		}
 	}
 
 	@Override
@@ -113,6 +130,8 @@ public class FragmentShowGames extends Fragment {
 							String gameId = game.getId();
 							if (gameId != null) {
 								mCallback.onGameSelected(gameId);
+							} else {
+								Toast.makeText(getActivity(), getString(R.string.error_loading_game), Toast.LENGTH_SHORT).show();
 							}
 
 						}
