@@ -26,7 +26,8 @@ import android.support.v4.widget.DrawerLayout;
 public class HomeActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks,
 		FragmentMyGames.OnGameSelectedListener,
-		FragmentShowGames.OnGameSelectedListener {
+		FragmentShowGames.OnGameSelectedListener,
+		FragmentHome.OnGameSelectedListener {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the

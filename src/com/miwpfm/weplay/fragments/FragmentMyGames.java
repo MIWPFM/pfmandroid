@@ -192,6 +192,8 @@ public class FragmentMyGames extends Fragment {
 							String gameId = game.getId();
 							if (gameId != null) {
 								mCallback.onGameSelected(gameId);
+							} else {
+								Toast.makeText(getActivity(), getString(R.string.error_loading_game), Toast.LENGTH_SHORT).show();
 							}
 
 						}
@@ -272,15 +274,14 @@ public class FragmentMyGames extends Fragment {
 						@Override
 						public void onItemClick(AdapterView<?> parent,
 								View view, int position, long id) {
-
-							// selected item
 							Game game = (Game) parent
 									.getItemAtPosition(position);
 							String gameId = game.getId();
 							if (gameId != null) {
 								mCallback.onGameSelected(gameId);
+							} else {
+								Toast.makeText(getActivity(), getString(R.string.error_loading_game), Toast.LENGTH_SHORT).show();
 							}
-
 						}
 					});
 				}

@@ -9,6 +9,7 @@ import org.json.JSONArray;
 
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.adapters.GameListAdapter;
+import com.miwpfm.weplay.fragments.FragmentMyGames.OnGameSelectedListener;
 import com.miwpfm.weplay.model.Game;
 import com.miwpfm.weplay.util.HydrateObjects;
 import com.miwpfm.weplay.util.Parameters;
@@ -40,6 +41,26 @@ public class FragmentHome extends Fragment {
 	private TextView txtRecommended;
 	private ListView gamesList;
 	private Map<String, String> myPosition = new HashMap<String, String>();
+	OnGameSelectedListener mCallback;
+
+	// Container Activity must implement this interface
+	public interface OnGameSelectedListener {
+		public void onGameSelected(String gameId);
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+
+		// This makes sure that the container activity has implemented
+		// the callback interface. If not, it throws an exception
+		try {
+			mCallback = (OnGameSelectedListener) activity;
+		} catch (ClassCastException e) {
+			throw new ClassCastException(activity.toString()
+					+ " must implement OnGameSelectedListener");
+		}
+	}
 	 
     @Override
     public View onCreateView(
@@ -135,13 +156,14 @@ public class FragmentHome extends Fragment {
 				            @Override
 							public void onItemClick(AdapterView<?> parent, View view,
 				                int position, long id) {
-
-				                // selected item
-				            	Game game = (Game) parent.getItemAtPosition(position);
-				                game.getId();
-				            	Toast toast = Toast.makeText(getActivity(), game.getId(), Toast.LENGTH_SHORT);
-				                toast.show();
-
+								Game game = (Game) parent
+										.getItemAtPosition(position);
+								String gameId = game.getId();
+								if (gameId != null) {
+									mCallback.onGameSelected(gameId);
+								} else {
+									Toast.makeText(getActivity(), getString(R.string.error_loading_game), Toast.LENGTH_SHORT).show();
+								}
 				            }
 				          });
 				 }
