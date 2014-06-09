@@ -184,7 +184,7 @@ public class HomeActivity extends Activity implements
 	private void shareApp() {
 		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
 		sharingIntent.setType("text/plain");
-		String shareBody = "WePlay mola!!!";
+		String shareBody = getResources().getString(R.string.share_app_phrase);
 		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
 		startActivity(Intent.createChooser(sharingIntent, "Compártelo por"));
 	}
