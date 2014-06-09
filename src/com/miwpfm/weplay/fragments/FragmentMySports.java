@@ -107,11 +107,8 @@ public class FragmentMySports extends Fragment {
 	   				sportList.setOnItemClickListener(new OnItemClickListener() {
 				            public void onItemClick(AdapterView<?> parent, View view,
 				                int position, long id) {
-
 				            	Sport sport = (Sport) parent.getItemAtPosition(position);
 				                sport.getId();
-				            	Toast toast = Toast.makeText(getActivity(), sport.getId(), Toast.LENGTH_SHORT);
-				                toast.show();
 				            }
 				     });
 				 }
