@@ -199,7 +199,6 @@ public class HomeActivity extends Activity implements
 				.beginTransaction();
 
 		transaction.replace(R.id.container, fragment);
-		transaction.addToBackStack(null);
 
 		transaction.commit();
 	}
