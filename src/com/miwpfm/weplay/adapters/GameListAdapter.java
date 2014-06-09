@@ -8,7 +8,6 @@ import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.model.Game;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -3,11 +3,9 @@ package com.miwpfm.weplay.fragments;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.adapters.GameListAdapter;
-import com.miwpfm.weplay.fragments.FragmentMyGames.OnGameSelectedListener;
 import com.miwpfm.weplay.model.Game;
 import com.miwpfm.weplay.util.HydrateObjects;
 import com.miwpfm.weplay.util.Parameters;
@@ -18,7 +16,6 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

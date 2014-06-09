@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Baloncesto"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/white" />
 
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="25/07/2014"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white" />
     </LinearLayout>
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/textVacanciesStatic"
-                    android:text="19/20"
+                    android:text=""
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </RelativeLayout>
 
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textWhere"
                     android:layout_centerHorizontal="true"
-                    android:text="Centro Deportivo Municipal Luis Aragonés"
+                    android:text=""
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textCenter"
                     android:layout_centerHorizontal="true"
-                    android:text="Santa Cruz de Tenerife"
+                    android:text=""
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </RelativeLayout>
 
@@ -130,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/textPriceStatic"
-                    android:text="49.50€"
+                    android:text=""
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </RelativeLayout>
 
@@ -158,7 +158,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/textUnsuscribeDateStatic"
-                    android:text="24/07/2015"
+                    android:text=""
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/danger" />
             </RelativeLayout>

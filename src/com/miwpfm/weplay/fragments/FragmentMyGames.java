@@ -3,7 +3,6 @@ package com.miwpfm.weplay.fragments;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.adapters.GameListAdapter;
@@ -20,7 +19,6 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +66,6 @@ public class FragmentMyGames extends Fragment {
 		txtTotal = (TextView) view.findViewById(R.id.txt_games_total);
 
 		ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-			RestClient gamesClient;
 
 			@Override
 			public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
@@ -77,7 +74,6 @@ public class FragmentMyGames extends Fragment {
 
 			@Override
 			public void onTabSelected(Tab tab, FragmentTransaction arg1) {
-				String[] datos = null;
 				int position;
 
 				position = tab.getPosition();
@@ -100,7 +96,6 @@ public class FragmentMyGames extends Fragment {
 
 			@Override
 			public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
-				// TODO Auto-generated method stub
 
 			}
 		};
@@ -122,7 +117,6 @@ public class FragmentMyGames extends Fragment {
 	public class PlayingGamesTask extends AsyncTask<Void, Void, Boolean> {
 
 		RestClient playingGamesClient;
-		private ProgressDialog dialog;
 		private Activity context;
 		private ArrayList<Game> games;
 
@@ -211,7 +205,6 @@ public class FragmentMyGames extends Fragment {
 	public class PlayedGamesTask extends AsyncTask<Void, Void, Boolean> {
 
 		RestClient playedGamesClient;
-		private ProgressDialog dialog;
 		private Activity context;
 		private ArrayList<Game> games;
 
@@ -297,7 +290,6 @@ public class FragmentMyGames extends Fragment {
 	public class OrganizedGamesTask extends AsyncTask<Void, Void, Boolean> {
 
 		RestClient organizedClient;
-		private ProgressDialog dialog;
 		private Activity context;
 		private ArrayList<Game> games;
 

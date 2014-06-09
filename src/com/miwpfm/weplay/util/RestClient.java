@@ -18,7 +18,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.protocol.ClientContext;
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -104,15 +103,14 @@ public class RestClient {
         headers.add(new BasicNameValuePair(name, value));
     }
 
-    public void Execute(RequestMethod method) throws Exception
+    @SuppressWarnings("incomplete-switch")
+	public void Execute(RequestMethod method) throws Exception
     {
         switch(method) {
             case GET:
             {
                 //add parameters
                 String combinedParams = "";
-                //api/me/recommended-games?{lat=40.5126674,long=-3.6742816}
-                //api/me/recommended-games?lat=40.5126093&long=-3.6742078
                 if(!this.params.isEmpty()){
                 	combinedParams += "?";
                     for(NameValuePair p : this.params)
@@ -131,7 +129,6 @@ public class RestClient {
                 }
                 
                 url += combinedParams;
-                //HttpGet request = new HttpGet(url + combinedParams);
                 HttpGet request = new HttpGet(url);
                 
                 //add headers
@@ -190,9 +187,7 @@ public class RestClient {
         HttpResponse httpResponse;
 
         try {
-        	//Encapsulamos        	
-            //((HttpResponse) request).setEntity(new UrlEncodedFormEntity(params)); 
-            
+        	//Encapsulamos            
         	httpResponse = client.execute(request,context);
             responseCode = httpResponse.getStatusLine().getStatusCode();
             message = httpResponse.getStatusLine().getReasonPhrase();

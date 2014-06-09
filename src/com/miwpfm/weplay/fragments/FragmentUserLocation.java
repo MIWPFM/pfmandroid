@@ -7,7 +7,6 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -184,13 +183,13 @@ public class FragmentUserLocation extends Fragment {
 						}
 					}
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				if (x != null || y != null) {
 					CameraUpdate cameraUpdate = CameraUpdateFactory
 							.newLatLngZoom(new LatLng(x, y), 16);
 					map.animateCamera(cameraUpdate);
+					@SuppressWarnings("unused")
 					Marker home = map.addMarker(new MarkerOptions()
 							.position(new LatLng(x, y))
 							.title(name)

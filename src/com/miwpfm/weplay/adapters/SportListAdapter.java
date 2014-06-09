@@ -2,7 +2,6 @@ package com.miwpfm.weplay.adapters;
 
 import java.util.ArrayList;
 
-import android.R.integer;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

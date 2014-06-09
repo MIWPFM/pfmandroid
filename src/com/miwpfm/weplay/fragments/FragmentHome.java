@@ -9,7 +9,6 @@ import org.json.JSONArray;
 
 import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.adapters.GameListAdapter;
-import com.miwpfm.weplay.fragments.FragmentMyGames.OnGameSelectedListener;
 import com.miwpfm.weplay.model.Game;
 import com.miwpfm.weplay.util.HydrateObjects;
 import com.miwpfm.weplay.util.Parameters;
