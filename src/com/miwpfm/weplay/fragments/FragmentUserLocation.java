@@ -34,57 +34,56 @@ public class FragmentUserLocation extends Fragment {
 	EditText editCommunity;
 	MapView mapView;
 	UserLocationTask task;
-    GoogleMap map;
-    
+	GoogleMap map;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.fragment_user_location, container,
-				false);
+		View view = inflater.inflate(R.layout.fragment_user_location,
+				container, false);
 		editAddress = (EditText) view.findViewById(R.id.editAddress);
 		editCity = (EditText) view.findViewById(R.id.editCity);
 		editProvince = (EditText) view.findViewById(R.id.editProvince);
 		editCommunity = (EditText) view.findViewById(R.id.editCommunity);
 		mapView = (MapView) view.findViewById(R.id.mapView);
 		mapView.onCreate(savedInstanceState);
-		
 
+		// Gets to GoogleMap from the MapView and does initialization stuff
+		map = mapView.getMap();
+		map.getUiSettings().setMyLocationButtonEnabled(false);
+		map.setMyLocationEnabled(true);
 
-        // Gets to GoogleMap from the MapView and does initialization stuff
-        map = mapView.getMap();
-        map.getUiSettings().setMyLocationButtonEnabled(false);
-        map.setMyLocationEnabled(true);
+		MapsInitializer.initialize(this.getActivity());
 
-        MapsInitializer.initialize(this.getActivity());
+		// Updates the location and zoom of the MapView
+		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+				new LatLng(40.430083, -3.648775), 16);
+		map.animateCamera(cameraUpdate);
 
-        // Updates the location and zoom of the MapView
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(40.430083, -3.648775), 16);
-        map.animateCamera(cameraUpdate);
-		
 		task = new UserLocationTask();
 		task.execute((Void) null);
 
 		return view;
 	}
 
-    @Override
-    public void onResume() {
-        mapView.onResume();
-        super.onResume();
-    }
+	@Override
+	public void onResume() {
+		mapView.onResume();
+		super.onResume();
+	}
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		mapView.onDestroy();
+	}
 
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
+	@Override
+	public void onLowMemory() {
+		super.onLowMemory();
+		mapView.onLowMemory();
+	}
 
 	/**
 	 * Represents an asynchronous login/registration task used to authenticate
@@ -156,27 +155,48 @@ public class FragmentUserLocation extends Fragment {
 				Double y = null;
 				dialog.dismiss();
 				try {
-					name = userLocation.getString("name");
-					addressObject = userLocation.getJSONObject("address");
-					coordinatesObject = addressObject
-							.getJSONObject("coordinates");
-					address = addressObject.getString("address");
-					city = addressObject.getString("city");
-					x = coordinatesObject.getDouble("x");
-					y = coordinatesObject.getDouble("y");
+					if (userLocation.has("name")) {
+						name = userLocation.getString("name");
+					}
+					if (userLocation.has("address")) {
+						addressObject = userLocation.getJSONObject("address");
+						if (addressObject.has("address")) {
+							address = addressObject.getString("address");
+						}
+						if (addressObject.has("city")) {
+							city = addressObject.getString("city");
+						}
+						if (addressObject.has("community")) {
+							community = addressObject.getString("community");
+						}
+						if (addressObject.has("province")) {
+							province = addressObject.getString("province");
+						}
+						if (addressObject.has("coordinates")) {
+							coordinatesObject = addressObject
+									.getJSONObject("coordinates");
+							if (coordinatesObject.has("x")) {
+								x = coordinatesObject.getDouble("x");
+							}
+							if (coordinatesObject.has("y")) {
+								y = coordinatesObject.getDouble("y");
+							}
+						}
+					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				if (x != null || y != null) {
-			        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(x, y), 16);
-			        map.animateCamera(cameraUpdate);
-			        Marker home = map.addMarker(new MarkerOptions()
-			          .position(new LatLng(x, y))
-			          .title(name)
-			          .snippet(address)
-			          .icon(BitmapDescriptorFactory
-			              .fromResource(R.drawable.home_success)));
+					CameraUpdate cameraUpdate = CameraUpdateFactory
+							.newLatLngZoom(new LatLng(x, y), 16);
+					map.animateCamera(cameraUpdate);
+					Marker home = map.addMarker(new MarkerOptions()
+							.position(new LatLng(x, y))
+							.title(name)
+							.snippet(address)
+							.icon(BitmapDescriptorFactory
+									.fromResource(R.drawable.home_success)));
 				}
 
 				editAddress.setText(address);

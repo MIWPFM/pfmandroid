@@ -168,14 +168,9 @@ public class FragmentGame extends Fragment {
 			return valid;
 		}
 
-		@SuppressLint("SimpleDateFormat")
 		@Override
 		protected void onPostExecute(final Boolean success) {
 			if (success) {
-				SimpleDateFormat formatterIn = new SimpleDateFormat(
-						"yyyy-MM-dd'T'HH:mm:ss");
-				SimpleDateFormat formatterOut = new SimpleDateFormat(
-						"dd/MM/yyyy");
 				JSONObject sportObject;
 				JSONObject centerObject;
 				JSONObject addressObject;
@@ -190,25 +185,52 @@ public class FragmentGame extends Fragment {
 				String unsuscribeDate = "";
 				dialog.dismiss();
 				try {
-					sportObject = gameInfo.getJSONObject("sport");
-					centerObject = gameInfo.getJSONObject("center");
-					addressObject = centerObject.getJSONObject("address");
-					coordinatesObject = addressObject
-							.getJSONObject("coordinates");
-					dlat = Double.toString(coordinatesObject.getDouble("x"));
-					dlng = Double.toString(coordinatesObject.getDouble("y"));
-					playersArray = gameInfo.getJSONArray("players");
-					sport = sportObject.getString("name");
-					date = Utils.formatDate(gameInfo.getString("game_date"));
-					int numPlayers = playersArray.length() + 1;
-					vacancies = numPlayers + "/"
-							+ gameInfo.getInt("num_players");
-					center = centerObject.getString("name");
-					city = addressObject.getString("city");
-					price = gameInfo.getString("price") + "€";
-					unsuscribeDate = Utils.formatDate(gameInfo
-							.getString("limit_date"));
-
+					if (gameInfo.has("game_date")) {
+						date = Utils.formatDate(gameInfo.getString("game_date"));
+					}
+					if (gameInfo.has("price")) {
+						price = gameInfo.getString("price") + "€";
+					}
+					if (gameInfo.has("limit_date")) {
+						unsuscribeDate = Utils.formatDate(gameInfo
+								.getString("limit_date"));
+					}
+					if (gameInfo.has("players")) {
+						playersArray = gameInfo.getJSONArray("players");
+						if (gameInfo.has("num_players")) {
+							int numPlayers = playersArray.length() + 1;
+							vacancies = numPlayers + "/"
+									+ gameInfo.getInt("num_players");
+						}
+					}
+					if (gameInfo.has("sport")) {
+						sportObject = gameInfo.getJSONObject("sport");
+						if (sportObject.has("name")) {
+							sport = sportObject.getString("name");
+						}
+					}
+					if (gameInfo.has("center")) {
+						centerObject = gameInfo.getJSONObject("center");
+						if (centerObject.has("name")) {
+							center = centerObject.getString("name");
+						}
+						if (centerObject.has("address")) {
+							addressObject = centerObject.getJSONObject("address");
+							if (addressObject.has("city")) {
+								city = addressObject.getString("city");
+							}
+							if (addressObject.has("coordinates")) {
+								coordinatesObject = addressObject
+										.getJSONObject("coordinates");
+								if (coordinatesObject.has("x")) {
+									dlat = Double.toString(coordinatesObject.getDouble("x"));
+								}
+								if (coordinatesObject.has("x")) {
+									dlng = Double.toString(coordinatesObject.getDouble("y"));
+								}
+							}
+						}
+					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}

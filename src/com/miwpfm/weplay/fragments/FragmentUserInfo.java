@@ -105,10 +105,19 @@ public class FragmentUserInfo extends Fragment {
 				String birthday = "";
 				dialog.dismiss();
 				try {
-					name = userInfo.getString("name");
-					username = userInfo.getString("username");
-					email = userInfo.getString("email");
-					birthday = Utils.formatDate(userInfo.getString("birthday"));
+					if (userInfo.has("name")) {
+						name = userInfo.getString("name");
+					}
+					if (userInfo.has("username")) {
+						username = userInfo.getString("username");
+					}
+					if (userInfo.has("email")) {
+						email = userInfo.getString("email");
+					}
+					if (userInfo.has("birthday")) {
+						birthday = Utils.formatDate(userInfo
+								.getString("birthday"));
+					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
