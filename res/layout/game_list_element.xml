@@ -1,85 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="5dip" >
 
-    <LinearLayout
-        android:id="@+id/left_games_layout"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/layout_0_games"
+        android:background="@color/success"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:orientation="horizontal"        
+        android:padding="3dip" >
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_1_games"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginRight="5dip"
-        android:padding="3dip"
-        android:orientation="vertical" >
+        android:orientation="horizontal"
+        android:padding="3dip" >
 
         <TextView
             android:id="@+id/gameDate"
             android:layout_width="50sp"
             android:layout_height="wrap_content"
-            android:text="fecha"
+            android:text=""
             android:textSize="14sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/sport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text=""
+            android:textSize="14sp"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_2_games"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="3dip" >
 
         <TextView
             android:id="@+id/gameHour"
-            android:layout_width="50sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hora"
+            android:text=""
             android:textSize="14sp"
             android:textStyle="bold" />
-        
-    </LinearLayout>
-    
-     <LinearLayout
-        android:id="@+id/center_games"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="70dip"
-        android:padding="3dip"
-        android:orientation="vertical" >
 
-            <TextView
-        android:id="@+id/sport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="deporte"
-        android:gravity="right"
-        android:textSize="14sp"
-        android:textStyle="normal" />
-            
-               <TextView android:id="@+id/distance"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:textStyle="normal"
-	    android:textSize="14sp" />
-            
-
+        <TextView
+            android:id="@+id/numPlayers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text=""
+            android:textSize="14sp"
+            android:textStyle="normal" />
     </LinearLayout>
 
-
-
-    <TextView
-        android:id="@+id/numPlayers"
+    <LinearLayout
+        android:id="@+id/layout_3_games"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
-        android:text="numplayers"
-        android:textSize="14sp"
-        android:textStyle="normal" />
+        android:orientation="horizontal"
+        android:padding="3dip" >
 
-    <TextView
-        android:id="@+id/place"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="lugar"
-         android:gravity="right"
-         android:layout_marginTop="20dp"
-        android:textSize="10sp"
-        android:textStyle="normal" />
-    
+        <TextView
+            android:id="@+id/place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="normal" />
+    </LinearLayout>
 
-</RelativeLayout>
-
+</LinearLayout>

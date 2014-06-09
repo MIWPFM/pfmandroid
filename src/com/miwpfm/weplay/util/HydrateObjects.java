@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.miwpfm.weplay.model.Game;
 import com.miwpfm.weplay.model.Sport;
 
@@ -22,7 +24,7 @@ public class HydrateObjects {
 		ArrayList<Game> games = new ArrayList<Game>();
 
 		for (int i = 0; i < json.length(); i++) {
-			JSONObject value = (JSONObject) json.get(i);
+			JSONObject value = (JSONObject) json.get(i);			
 
 			try {
 
@@ -53,7 +55,7 @@ public class HydrateObjects {
 				}
 				if (value.has("sport")) {
 					JSONObject sport = (JSONObject) value.get("sport");
-					if (value.has("name")) {
+					if (sport.has("name")) {
 						game.setSport(sport.getString("name"));
 					}
 				}

@@ -52,6 +52,7 @@
 
     <!-- game -->
     <string name="game_vacancies">Plazas: </string>
+    <string name="game_where">¿Dónde jugamos?</string>
     <string name="game_price">Precio: </string>
     <string name="game_unsuscribe_limit">Límite de Baja: </string>
     <string name="game_how_to_go">Cómo llego</string>

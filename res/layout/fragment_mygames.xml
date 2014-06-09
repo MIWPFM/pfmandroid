@@ -12,7 +12,6 @@
         android:id="@+id/txt_games_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="30sp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold" />
@@ -21,7 +20,7 @@
         android:id="@+id/my_games_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txt_games_total" >
+        android:layout_below="@+id/txt_games_total" >
 
     </ListView>
 

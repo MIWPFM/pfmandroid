@@ -8,6 +8,7 @@ import com.miwpfm.weplay.R;
 import com.miwpfm.weplay.model.Game;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,6 @@ public class GameListAdapter extends ArrayAdapter<Game> {
 	    // fill data
 	    ViewHolder holder = (ViewHolder) rowView.getTag();
 	    Game game = games.get(position);
-	    holder.sport.setText(game.getSport());
 	    holder.place.setText(game.getPlace());
 	    String numPlayers=game.getNumPlayers()+"/"+game.getMaxPlayers();
 	    holder.numPlayers.setText(numPlayers);
@@ -66,8 +66,13 @@ public class GameListAdapter extends ArrayAdapter<Game> {
 	    String hour = hourFormat.format(game.getGameDate());
 	    holder.gameDate.setText(date);
 	    holder.hourDate.setText(hour);	
-	    if(game.getDistance()>0)
+	    if(game.getDistance()>0) {
+		    holder.sport.setText(game.getSport());
 	    	holder.distance.setText(String.format("%.2f",game.getDistance())+"KM");
+	    } else {
+		    holder.distance.setText(game.getSport());
+	    }
+	    	
 	    
 	    return rowView;
 	  }
