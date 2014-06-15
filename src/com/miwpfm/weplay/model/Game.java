@@ -13,7 +13,7 @@ public class Game {
 	
 	public Game() {
 		super();
-		distance=-1;
+		distance = -1;
 	}
 	
 	public String getId() {
